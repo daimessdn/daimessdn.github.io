@@ -1,12 +1,25 @@
-@import url('https://fonts.googleapis.com/css?family=Archivo|Archivo+Black&display=swap');
+@import url('https://fonts.googleapis.com/css?family=Chakra+Petch:400,600&display=swap');
 
 @keyframes wiping {
   from {
-    width: 0ch;
+    width: 0;
   } to {
     width: 100%;
   }
 }
+
+@keyframes blink {
+  0% {
+    opacity: 0;
+  }
+  50% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+  }
+}
+
 
 html, body {
   height: 100%;
@@ -18,8 +31,7 @@ html {
 }
 
 body {
-  background-color: #343a40;
-  font-family: "Archivo", Arial, Helvetica, sans-serif;
+  font-family: "Chakra Petch", Arial, Helvetica, sans-serif;
   background-color: #343a40;
   color: #fff;
   display: table-cell;
@@ -27,13 +39,22 @@ body {
 }
 
 h1, h2, h3, h4, h5, h6 {
-  font-family: "Archivo";
+  font-family: "Chakra Petch";
   overflow: hidden;
   white-space: nowrap;
-  font-weight: 400;
   animation: wiping 2s;
 }
 
+.blink {
+  animation: blink 1s infinite;
+}
+
 .coming-soon {
-  margin: 0 auto;
+  width: 100%;
+}
+
+.coming-soon::before {
+  font-size: 2em;
+  font-weight: bolder;
+  position: absolute;
 }
