@@ -1,9 +1,39 @@
-@font-face {
-  font-family: "Helvetica Neue";
-  src: url("../fonts/HelveticaNeueMedium.ttf")
+@import url('https://fonts.googleapis.com/css?family=Archivo|Archivo+Black&display=swap');
+
+@keyframes wiping {
+  from {
+    width: 0ch;
+  } to {
+    width: 100%;
+  }
+}
+
+html, body {
+  height: 100%;
+}
+
+html {
+  display: table;
+  margin: auto;
 }
 
 body {
-  background: #343a40;
-  font-family: "Helvetica Neue", Arial, Helvetica, sans-serif;
+  background-color: #343a40;
+  font-family: "Archivo", Arial, Helvetica, sans-serif;
+  background-color: #343a40;
+  color: #fff;
+  display: table-cell;
+  vertical-align: middle;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: "Archivo";
+  font-weight: 400;
+  overflow: hidden;
+  white-space: nowrap;
+  animation: wiping 2s;
+}
+
+.coming-soon {
+  margin: 0 auto;
 }
