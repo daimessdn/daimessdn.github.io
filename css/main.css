@@ -1,4 +1,7 @@
-@import url('https://fonts.googleapis.com/css?family=Chakra+Petch:400,600&display=swap');
+@font-face {
+  font-family: "Akkurat Mono";
+  src: url("../fonts/Akkurat-Mono.OTF");
+}
 
 @keyframes wiping {
   from {
@@ -7,6 +10,7 @@
     width: 100%;
   }
 }
+
 @keyframes blink {
   0% {
     opacity: 0;
@@ -30,7 +34,7 @@ html {
 }
 
 body {
-  font-family: "Chakra Petch", Arial, Helvetica, sans-serif;
+  font-family: "Akkurat Mono", Arial, Helvetica, sans-serif;
   background-color: #343a40;
   color: #fff;
   display: table-cell;
@@ -38,7 +42,7 @@ body {
 }
 
 h1, h2, h3, h4, h5, h6 {
-  font-family: "Roboto Mono";
+  font-family: "Akkurat Mono";
   overflow: hidden;
   white-space: nowrap;
   animation: wiping 2s;
