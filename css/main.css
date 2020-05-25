@@ -1,5 +1,6 @@
 @font-face {
   font-family: "Akkurat Mono";
+  font-weight: 100;
   src: url("../fonts/Akkurat-Mono.OTF");
 }
 
@@ -44,9 +45,9 @@ body {
 h1, h2, h3, h4, h5, h6 {
   font-family: "Akkurat Mono";
   overflow: hidden;
-  font-weight: 200;
   white-space: nowrap;
   animation: wiping 2s;
+  font-weight: 100;
 }
 
 .blink {
