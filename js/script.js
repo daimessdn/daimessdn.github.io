@@ -28,7 +28,10 @@ function dummyExec_(command) {
 		window.location.assign(window.location.origin + "/" + command);
 
 		terminal_msg.innerHTML += "Opening <em>journal</em>, plase wait...<br />";
-	} else {
+	} else if (command == "clear") {
+		terminal_msg.innerHTML = "";
+	}
+	else {
 		terminal_msg.innerHTML += command + ": command not found<br />";
 	}
 
