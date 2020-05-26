@@ -16,7 +16,7 @@ let datever = year + "." + month;
 
 document.getElementById("date_ver").innerHTML = datever;
 
-let command_val = document.getElementById("dummy-cli").lastElementChild.value;
+// let command_val = document.getElementById("dummy-cli").lastElementChild.value;
 let terminal_msg = document.getElementById("container");
 
 function dummyExec_(command) {
@@ -35,5 +35,5 @@ function dummyExec_(command) {
 		terminal_msg.innerHTML += command + ": command not found<br />";
 	}
 
-	command_val = "";
+	document.getElementById("dummy-cli").lastElementChild.value = ""
 }
