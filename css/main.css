@@ -63,16 +63,19 @@ h1, h2, h3, h4, h5, h6 {
   position: absolute;
 }
 
-#brand {
+#brand, #dummy-cli {
   margin: 0;
   padding: 0;
   list-style: none;
   position: fixed;
-  left: 8px;
-  bottom: 8px;
   overflow: hidden;
   z-index: 10;
   line-height: 1.3;
+}
+
+#brand {
+  left: 8px;
+  bottom: 8px;
 }
 
 #brand h1 {
@@ -83,4 +86,21 @@ h1, h2, h3, h4, h5, h6 {
 #brand h4 {
   font-size: 14px;
   margin: 0;
+}
+
+#dummy-cli {
+  right: 8px;
+  bottom: 8px;
+}
+
+#dummy-cli input, #dummy-cli button {
+  font-family: "Akkurat Mono";
+  height: 2rem;
+}
+
+#dummy-cli button {
+  background-color: #343a40;
+  color: #fff;
+  border: solid 1s #fff;
+  border-radius: 10px 0 0 10px;
 }
