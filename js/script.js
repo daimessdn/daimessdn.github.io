@@ -20,11 +20,11 @@ let command_val = document.getElementById("dummy-cli").lastElementChild.value;
 
 function dummyExec_(command) {
 	if (command == "./journal") {
-		command.replace("./", "");
-		console.log(command);
-		console.log(window.location.origin);
+		command = command.replace("./", "");
+		// console.log(command);
+		// console.log(window.location.origin);
 
-		// window.location.assign(window.location.origin);
+		window.location.assign(window.location.origin + "/" + command);
 	}
 
 	command_val = "";
