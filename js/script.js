@@ -15,3 +15,17 @@ if (month > 0) {
 let datever = year + "." + month;
 
 document.getElementById("date_ver").innerHTML = datever;
+
+let command_val = document.getElementById("dummy-cli").lastElementChild.value;
+
+function dummyExec_(command) {
+	if (command == "./journal") {
+		command.replace("./", "");
+		console.log(command);
+		console.log(window.location.origin);
+
+		// window.location.assign(window.location.origin);
+	}
+
+	command_val = "";
+}

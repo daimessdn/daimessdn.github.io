@@ -29,7 +29,13 @@
   <div id="dummy-cli">
     <button id="dummy-button">
       <i class="fas fa fa-terminal"></i>
-    </button><input type="text" name="command" placeholder="$_" />
+    </button><input type="text" 
+                    name="command"
+                    placeholder="$_"
+                    onkeyup="
+                      if (event.keyCode == 13) {
+                        dummyExec_(document.getElementById('dummy-cli').lastElementChild.value);
+                      }" />
   </div>
   <script type="text/javascript" src="js/script.js"></script>
 </body>
