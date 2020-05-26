@@ -29,17 +29,18 @@ html, body {
   height: 100%;
 }
 
-html {
+/* html {
   display: table;
   margin: auto;
-}
+} */
 
 body {
   font-family: "Akkurat Mono", Arial, Helvetica, sans-serif;
   background-color: #343a40;
   color: #fff;
-  display: table-cell;
-  vertical-align: middle;
+  overflow: hidden;
+  /* display: table-cell;
+  vertical-align: middle; */
 }
 
 h1, h2, h3, h4, h5, h6 {
