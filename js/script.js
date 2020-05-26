@@ -15,6 +15,7 @@ if (month > 0) {
 let datever = year + "." + month;
 
 document.getElementById("date_ver").innerHTML = datever;
+document.title = "@dimaswehhh " + datever;
 
 // let command_val = document.getElementById("dummy-cli").lastElementChild.value;
 let terminal_msg = document.getElementById("container");
