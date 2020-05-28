@@ -111,3 +111,15 @@ h1, h2, h3, h4, h5, h6 {
   width: 12rem;
   padding-left: 5px;
 }
+
+@media screen and (max-width: 500px) and (min-width: 100px) {
+  h1, h2, h3, h4, h5, h6 {
+    font-size: 14px;
+  }
+}
+
+@media screen and (max-height: 400px) and (min-height: 50px) {
+  h1, h2, h3, h4, h5, h6 {
+    font-size: 14px;
+  }
+}
