@@ -21,14 +21,14 @@ document.title = "@dimaswehhh " + datever;
 let terminal_msg = document.getElementById("container");
 
 function dummyExec_(command) {
-	if (command == "./journal") {
+	if (command == "./journal" || command == "./codebread") {
 		command = command.replace("./", "");
 		// console.log(command);
 		// console.log(window.location.origin);
 
 		window.location.assign(window.location.origin + "/" + command);
 
-		terminal_msg.innerHTML += "Opening <em>journal</em>, plase wait...<br />";
+		terminal_msg.innerHTML += "Opening <em>" + command + "</em>, plase wait...<br />";
 	} else if (command == "clear") {
 		terminal_msg.innerHTML = "";
 	}
