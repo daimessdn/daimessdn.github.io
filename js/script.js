@@ -21,7 +21,7 @@ document.title = "@dimaswehhh " + datever;
 // let command_val = document.getElementById("dummy-cli").lastElementChild.value;
 let terminal_msg = document.getElementById("container");
 
-let executable = ["journal", "codebread", "simpth", "generic-sensor"];
+let executable = ["./journal", "./codebread", "./simpth", "./generic-sensor"];
 
 function dummyExec_(command) {
 	if (executable.includes(command)) {
