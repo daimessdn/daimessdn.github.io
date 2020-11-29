@@ -28,7 +28,7 @@ function dummyExec_(command) {
 		
 		terminal_msg.innerHTML += "Opening <em>" + command + "</em>, plase wait...<br />";
 
-		window.open(window.location.origin + "/" + command, "_blank", height=500, width=400);
+		window.open(window.location.origin + "/" + command, "_blank", "height=500,width=400");
 
 		terminal_msg.innerHTML += `${command} opened.`;
 

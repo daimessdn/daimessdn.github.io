@@ -102,8 +102,7 @@ h1, h2, h3, h4, h5, h6 {
 #dummy-cli button {
   background-color: #343a40;
   color: #fff;
-  border: solid 1s #fff;
-  border-radius: 10px 0 0 10px;
+  border: 3px solid #fff;
 }
 
 #dummy-cli input {
