@@ -6,8 +6,21 @@ let year = b.getFullYear() - a.getFullYear() + parseInt((a.getMonth() + b.getMon
 
 let terminal_msg = document.getElementById("container");
 
+if (month < 10) {
+	month = "0" + month;
+}
+
+if (month > 0) {	
+	year = year - 1;
+}
+
+let datever = year + "." + month;
+
 const getLastLogin = () => {
-	terminal_msg.innerHTML += "Last login: " + b.toString() + "<br />";
+	terminal_msg.innerHTML += `
+		Last login: ${b.toString()}<br />
+		Welcome to daimessdn.github.io<br />
+		Current version: ${datever}<br />`;
 }
 
 let consoleInput = `
@@ -29,22 +42,11 @@ let consoleInput = `
 
 let consoleInputSelect = document.querySelectorAll('.console-input');
 
-
 const focusInConsoleInput = () => {
 	terminal_msg.innerHTML += consoleInput;
 	consoleInputSelect = document.querySelectorAll('.console-input');
-	consoleInputSelect[consoleInputSelect.length - 1].focus();
+	consoleInputSelect[consoleInputSelect.length - 1].select;
 };
-
-if (month < 10) {
-	month = "0" + month;
-}
-
-if (month > 0) {	
-	year = year - 1;
-}
-
-let datever = year + "." + month;
 
 document.getElementById("date_ver").innerHTML = datever;
 document.title = "@dimaswehhh " + datever;
