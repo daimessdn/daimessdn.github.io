@@ -8,7 +8,7 @@ if (month < 10) {
 	month = "0" + month;
 }
 
-if (month > 0) {
+if (month > 0) {	
 	year = year - 1;
 }
 
@@ -25,10 +25,13 @@ function dummyExec_(command) {
 		command = command.replace("./", "");
 		// console.log(command);
 		// console.log(window.location.origin);
-
-		window.location.assign(window.location.origin + "/" + command);
-
+		
 		terminal_msg.innerHTML += "Opening <em>" + command + "</em>, plase wait...<br />";
+
+		window.open(window.location.origin + "/" + command, "_blank", height=500, width=400);
+
+		terminal_msg.innerHTML += `${command} opened.`;
+
 	} else if (command == "clear") {
 		terminal_msg.innerHTML = "";
 	}
