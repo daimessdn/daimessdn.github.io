@@ -21,8 +21,10 @@ document.title = "@dimaswehhh " + datever;
 // let command_val = document.getElementById("dummy-cli").lastElementChild.value;
 let terminal_msg = document.getElementById("container");
 
+let executable = ["journal", "codebread", "simpth", "generic-sensor"];
+
 function dummyExec_(command) {
-	if (command == "./journal" || command == "./codebread") {
+	if (executable.includes(command)) {
 		command = command.replace("./", "");
 		// console.log(command);
 		// console.log(window.location.origin);
@@ -35,7 +37,12 @@ function dummyExec_(command) {
 
 	} else if (command == "clear") {
 		terminal_msg.innerHTML = "";
+	} else if (command == "exit") {
+		terminal_msg.innerHTML += "Bye!"
+
+		setTimeout(window.close(), 300);
 	}
+
 	else {
 		terminal_msg.innerHTML += command + ": command not found<br />";
 	}
