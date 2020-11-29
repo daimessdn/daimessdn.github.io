@@ -49,7 +49,7 @@ const focusInConsoleInput = () => {
 };
 
 // document.getElementById("date_ver").innerHTML = datever;
-// document.title = "@dimaswehhh " + datever;
+document.title = "@dimaswehhh " + datever;
 
 let executable = ["journal", "codebread", "simpth", "generic-sensor"];
 
