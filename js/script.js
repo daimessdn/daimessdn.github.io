@@ -37,7 +37,7 @@ let consoleInput = `
 						       if (this.innerHTML.length === 1) {
 							       this.innerHTML = ' ';
 						       }
-					       }"></span>
+						   };"></span>
 `;
 
 let consoleInputSelect = document.querySelectorAll('.console-input');
