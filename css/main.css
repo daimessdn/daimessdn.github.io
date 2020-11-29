@@ -79,6 +79,7 @@ h1, h2, h3, h4, h5, h6 {
 
 .machine-console {
   color: #8AE234;
+  outline: none;
 }
 
 .console-input::before {
@@ -86,14 +87,15 @@ h1, h2, h3, h4, h5, h6 {
   color: #fff;
 }
 
-/* .console-input::after {
+.console-input::after {
   content: "_";
   color: #fff;
   width: 3px;
-} */
+}
 
 .console-input:focus {
   border: none;
+  outline: none;
 }
 
 @media screen and (max-width: 500px) and (min-width: 100px) {
