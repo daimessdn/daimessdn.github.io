@@ -2,8 +2,39 @@ const a = new Date("09/02/1998");
 let b = new Date();
 
 let month = parseInt((b.getMonth() - a.getMonth()) % 12);
-
 let year = b.getFullYear() - a.getFullYear() + parseInt((a.getMonth() + b.getMonth()) / 12);
+
+let terminal_msg = document.getElementById("container");
+
+const getLastLogin = () => {
+	terminal_msg.innerHTML += "Last login: " + b.toString() + "<br />";
+}
+
+let consoleInput = `
+	<strong
+		class="machine-console">daimessdn@daimessdn.github.io</strong><span class="console-input"
+				contenteditable="true" 
+				onkeydown="if (event.keyCode == 13) {
+						       dummyExec_(this.innerHTML);
+						   }
+							
+						   if (this.innerHTML === ' ') {
+							   this.innerHTML = this.innerHTML;
+						   } else if (event.keyCode === 8) {
+						       if (this.innerHTML.length === 1) {
+							       this.innerHTML = ' ';
+						       }
+					       }"></span>
+`;
+
+let consoleInputSelect = document.querySelectorAll('.console-input');
+
+
+const focusInConsoleInput = () => {
+	terminal_msg.innerHTML += consoleInput;
+	consoleInputSelect = document.querySelectorAll('.console-input');
+	consoleInputSelect[consoleInputSelect.length - 1].focus();
+};
 
 if (month < 10) {
 	month = "0" + month;
@@ -18,18 +49,16 @@ let datever = year + "." + month;
 document.getElementById("date_ver").innerHTML = datever;
 document.title = "@dimaswehhh " + datever;
 
-// let command_val = document.getElementById("dummy-cli").lastElementChild.value;
-let terminal_msg = document.getElementById("container");
-
-let executable = ["./journal", "./codebread", "./simpth", "./generic-sensor"];
+let executable = ["journal", "codebread", "simpth", "generic-sensor"];
 
 function dummyExec_(command) {
+	consoleInputSelect[consoleInputSelect.length - 1].removeAttribute("contenteditable");
+
+	command = command.replace("./", "");
+	command = command.trim();
+	
 	if (executable.includes(command)) {
-		command = command.replace("./", "");
-		// console.log(command);
-		// console.log(window.location.origin);
-		
-		terminal_msg.innerHTML += "Opening <em>" + command + "</em>, plase wait...<br />";
+		terminal_msg.innerHTML += "<br />Opening <em>" + command + "</em>, please wait...<br />";
 
 		window.open(window.location.origin + "/" + command, "_blank", "height=500,width=400,location=no");
 
@@ -38,14 +67,14 @@ function dummyExec_(command) {
 	} else if (command == "clear") {
 		terminal_msg.innerHTML = "";
 	} else if (command == "exit") {
-		terminal_msg.innerHTML += "Bye!"
+		terminal_msg.innerHTML += "<br />Bye!<br />"
 
 		setTimeout(window.close(), 300);
 	}
 
 	else {
-		terminal_msg.innerHTML += command + ": command not found<br />";
+		terminal_msg.innerHTML += "<br />" + command + ": command not found<br />";
 	}
 
-	document.getElementById("dummy-cli").lastElementChild.value = ""
+	terminal_msg.innerHTML += consoleInput;
 }

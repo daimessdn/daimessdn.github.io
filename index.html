@@ -5,13 +5,15 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0, height=device-height, user-scalable=false">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <title>@dimaswehhh 21.0</title>
+
   <link rel="preconnect" href="https://fonts.gstatic.com">
   <link href="https://fonts.googleapis.com/css2?family=Space+Mono:ital,wght@0,400;0,700;1,400;1,700&display=swap" rel="stylesheet">
+  
   <link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
 
   <link rel="stylesheet" href="css/main.css" />
 </head>
-<body>
+<body onload="getLastLogin(); focusInConsoleInput();">
   <div id="brand">
     <h1>@dimaswehhh<i class="blink">_</i></h1>
     <h4>
@@ -21,25 +23,6 @@
 
   <div id="container"></div>
 
-  <!-- <div class="coming-soon">
-      <h1>
-        @dimaswehhh<i class="blink">_</i><br />
-        <span">21.00</span><i class="blink">_</i>
-      </h1>
-      <h4>coming soon...<i class="blink">_</i></h4>
-  </div> -->
-
-  <div id="dummy-cli">
-    <button id="dummy-button">
-      <i class="fas fa fa-terminal"></i>
-    </button><input type="text" 
-                    name="command"
-                    placeholder="$_"
-                    onkeyup="
-                      if (event.keyCode == 13) {
-                        dummyExec_(document.getElementById('dummy-cli').lastElementChild.value);
-                      }" />
-  </div>
   <script type="text/javascript" src="js/script.js"></script>
 </body>
 </html>
