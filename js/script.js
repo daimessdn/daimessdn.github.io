@@ -25,7 +25,7 @@ const getLastLogin = () => {
 
 let consoleInput = `
 	<strong
-		class="machine-console">daimessdn@daimessdn.github.io</strong><span class="console-input"
+		class="machine-console">dimaswehhh@daimessdn.github.io</strong><span class="console-input"
 				contenteditable="true" 
 				onkeydown="if (event.keyCode == 13) {
 						       dummyExec_(this.innerHTML);
