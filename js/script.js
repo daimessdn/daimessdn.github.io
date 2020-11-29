@@ -31,7 +31,7 @@ function dummyExec_(command) {
 
 		window.open(window.location.origin + "/" + command, "_blank", "height=500,width=400,location=no");
 
-		terminal_msg.innerHTML += `${command} opened.`;
+		terminal_msg.innerHTML += `${command} opened.<br />`;
 
 	} else if (command == "clear") {
 		terminal_msg.innerHTML = "";
