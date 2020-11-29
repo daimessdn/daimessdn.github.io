@@ -48,8 +48,8 @@ const focusInConsoleInput = () => {
 	consoleInputSelect[consoleInputSelect.length - 1].select;
 };
 
-document.getElementById("date_ver").innerHTML = datever;
-document.title = "@dimaswehhh " + datever;
+// document.getElementById("date_ver").innerHTML = datever;
+// document.title = "@dimaswehhh " + datever;
 
 let executable = ["journal", "codebread", "simpth", "generic-sensor"];
 
