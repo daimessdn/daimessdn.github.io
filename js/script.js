@@ -18,45 +18,32 @@ let datever = year + "." + month;
 
 const getLastLogin = () => {
 	terminal_msg.innerHTML += `
-		Last login: ${b.toString()}<br />
+		Last login: ${b.toString()}<br /><br />
 		Welcome to daimessdn.github.io<br />
 		Current version: ${datever}<br />`;
 }
 
-let consoleInput = `
-	<strong
-		class="machine-console">dimaswehhh@daimessdn.github.io</strong><span class="console-input"
-				contenteditable="true" 
-				onkeydown="if (event.keyCode == 13) {
-						       dummyExec_(this.innerHTML);
-						   }
-							
-						   if (this.innerHTML === ' ') {
-							   this.innerHTML = this.innerHTML;
-						   } else if (event.keyCode === 8) {
-						       if (this.innerHTML.length === 1) {
-							       this.innerHTML = ' ';
-						       }
-						   };"></span>
-`;
+let consoleInput = `<strong class="machine-console">dimaswehhh@daimessdn.github.io</strong><span class="console-input" contenteditable="true"></span>`;
 
-let consoleInputSelect = document.querySelectorAll('.console-input');
+let consoleInputSelect = document.getElementsByClassName('console-input');
 
 const focusInConsoleInput = () => {
 	terminal_msg.innerHTML += consoleInput;
-	consoleInputSelect = document.querySelectorAll('.console-input');
-	consoleInputSelect[consoleInputSelect.length - 1].select;
+	consoleInputSelect = document.getElementsByClassName('console-input');
+	consoleInputSelect[consoleInputSelect.length - 1].textContent = "";
+	consoleInputSelect[consoleInputSelect.length - 1].focus();
 };
 
 // document.getElementById("date_ver").innerHTML = datever;
 document.title = "@dimaswehhh " + datever;
 
-let executable = ["journal", "codebread", "simpth", "generic-sensor"];
+let executable = ["journal", "codebread", "simpth", "generic-sensor", "las_converter"];
 
-function dummyExec_(command) {
+const dummyExec_ = (command) => {
 	consoleInputSelect[consoleInputSelect.length - 1].removeAttribute("contenteditable");
 
 	command = command.replace("./", "");
+	command = command.replace("<br>", "");
 	command = command.trim();
 	
 	if (executable.includes(command)) {
@@ -65,13 +52,14 @@ function dummyExec_(command) {
 		window.open(window.location.origin + "/" + command, "_blank", "height=500,width=400,location=no");
 
 		terminal_msg.innerHTML += `${command} opened.<br />`;
-
 	} else if (command == "clear") {
 		terminal_msg.innerHTML = "";
 	} else if (command == "whoami") {
 		terminal_msg.innerHTML += "<br>dimaswehhh</br>";
 	} else if (command == "hostname") {
 		terminal_msg.innerHTML += "<br>daimessdn.github.io</br>";
+	} else if (command == "ls") {
+		terminal_msg.innerHTML += "<br />" + executable.join("\xa0\xa0\xa0") + "<br />";
 	} else if (command == "exit") {
 		terminal_msg.innerHTML += "<br />Bye!<br />"
 
@@ -82,5 +70,22 @@ function dummyExec_(command) {
 		terminal_msg.innerHTML += "<br />" + command + ": command not found<br />";
 	}
 
-	terminal_msg.innerHTML += consoleInput;
 }
+
+window.addEventListener('focus', () => consoleInputSelect[consoleInputSelect.length - 1].focus());
+
+document.addEventListener('keydown', (event) => {
+	if (event.keyCode == 13) {
+		dummyExec_(consoleInputSelect[consoleInputSelect.length - 1].textContent);
+		focusInConsoleInput();
+	} else if (event.keyCode === 8) {
+		if (consoleInputSelect[consoleInputSelect.length - 1].textContent.length === 1) {
+			consoleInputSelect[consoleInputSelect.length - 1].textContent = ' ';
+		}
+	};
+});
+
+document.addEventListener("DOMContentLoaded", () => {
+	getLastLogin();
+	focusInConsoleInput();
+})

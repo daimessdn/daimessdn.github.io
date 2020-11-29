@@ -87,11 +87,11 @@ h1, h2, h3, h4, h5, h6 {
   color: #fff;
 }
 
-.console-input::after {
+/* .console-input::after {
   content: "_";
   color: #fff;
   width: 3px;
-}
+} */
 
 .console-input:focus {
   border: none;
