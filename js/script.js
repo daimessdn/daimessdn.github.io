@@ -68,6 +68,10 @@ function dummyExec_(command) {
 
 	} else if (command == "clear") {
 		terminal_msg.innerHTML = "";
+	} else if (command == "whoami") {
+		terminal_msg.innerHTML += "<br>dimaswehhh</br>";
+	} else if (command == "hostname") {
+		terminal_msg.innerHTML += "<br>daimessdn.github.io</br>";
 	} else if (command == "exit") {
 		terminal_msg.innerHTML += "<br />Bye!<br />"
 
