@@ -6,10 +6,12 @@ let year = b.getFullYear() - a.getFullYear() + parseInt((a.getMonth() + b.getMon
 
 let terminal_msg = document.getElementById("container");
 
+let terminalConfig = {
+	fontSize: "medium"
+};
+
 let consoleHistory = [];
 let historyIndex = consoleHistory.length;
-
-let s = window.getSelection();
 
 let startingSelection = 0;
 
@@ -120,59 +122,48 @@ document.addEventListener('keydown', (event) => {
   }
 });
 
-// document.addEventListener("keyup", () => {
-// 	console.log(s);
-
-// 	// oRange = s.getRangeAt(startingSelection); //get the text range
-// 	// console.log(oRange)
-// 	// oRect = oRange.getBoundingClientRect()
-	
-// });
-
 document.addEventListener("DOMContentLoaded", () => {
   getLastLogin();
-	generateConsoleInput();
-  
-  // s = window.getSelection();
-	// oRange = s.getRangeAt(0); //get the text range
-	// console.log(oRange)
-	// oRect = oRange.getBoundingClientRect()
+  generateConsoleInput();
+  // terminalKeyboard();
 })
 
-document.addEventListener("keyup", (event) => {
-  event.preventDefault();
-
+const terminalKeyboard = () => {
   if (window.getSelection) {
     caret = window.getSelection();
     
     if (caret.rangeCount) {
       range = caret.getRangeAt(0);
-    }
     
-    element = range.commonAncestorContainer.parentElement;
-
-    content = element.textContent;
-
-    modified = content.split();
+   	  element = range.commonAncestorContainer.parentElement;
+      content = element.textContent;
+	  HTMLContent = element.innerHTML.slice(0, range.startOffset)
+					+ '<span style="background-color: #fff; color: #300a24">'
+					+ element.innerHTML.slice(range.startOffset, range.endOffset)
+					+ '</span>'
+					+ element.innerHTML.slice(range.endOffset, content.length);
+	}
     
-    for (let i = 0; i < modified.length; i++) {
-      if (i == range.startOffset) {
-        modified[i] = "<span style='background-color: #fff; color: #300a24;'>"
-                + modified[i]
-                + "</span>";
-      }
-    }
-    
-    lastConsoleInput.innerHTML = modified.join('');
-    
-    console.log(modified);
-
-    return false;
-
   } else if (document.selection) {
-    textRange = document.selection;
-    console.log(document.selection);
+      textRange = document.selection;
+      console.log(document.selection);
   }
 
   // console.log(textRange.parentElement)
-})
+  lastConsoleInput.innerHTML = HTMLContent;
+};
+
+document.addEventListener("click", (event) => {
+	let optionId = event.target.id;
+
+	if (optionId === "font-size") {
+		if (terminalConfig.fontSize === "small") {
+			terminalConfig.fontSize = "medium";
+		} else if (terminalConfig.fontSize === "medium") {
+			terminalConfig.fontSize = "large";
+		} else {
+			terminalConfig.fontSize = "small";
+		}
+	document.body.style.fontSize = terminalConfig.fontSize;
+	}
+});
