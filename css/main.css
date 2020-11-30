@@ -1,3 +1,9 @@
+@keyframes blink {
+  0%   { opacity: 1; }
+  50%  { opacity: 0; }
+  100% { opacity: 1; }
+}
+
 body {
   font-family: "Space Mono", Arial, Helvetica, sans-serif;
   background-color: #300a24;
@@ -15,11 +21,12 @@ body {
   color: #fff;
 }
 
-/* .console-input::after {
+.console-input::after {
   content: "_";
   color: #fff;
   width: 3px;
-} */
+  animation: blink 1s ease;
+}
 
 .console-input:focus {
   border: none;
