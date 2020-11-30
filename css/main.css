@@ -25,7 +25,7 @@ body {
   content: "_";
   color: #fff;
   width: 3px;
-  animation: blink 1s ease;
+  animation: blink 1s ease infinite;
 }
 
 .console-input:focus {
