@@ -20,7 +20,7 @@ if (month > 0) {
 let datever = year + "." + month;
 
 const getLastLogin = () => {
-	terminal_msg.innerHTML += `Last login: ${b.toString()}<br /><br /> Welcome to daimessdn.github.io<br /> Current version: ${datever}<br />`;
+	terminal_msg.innerHTML += `Last login: ${b.toString()}<br /><br /> Welcome to daimessdn.github.io<br /> Current version: ${datever}<br /><br />`;
 }
 
 let consoleInput = `<strong class="machine-console">dimaswehhh@daimessdn.github.io</strong><span class="console-input" contenteditable="true"></span>`;
