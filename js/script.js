@@ -9,6 +9,10 @@ let terminal_msg = document.getElementById("container");
 let consoleHistory = [];
 let historyIndex = consoleHistory.length;
 
+let s = window.getSelection();
+
+let startingSelection = 0;
+
 if (month < 10) {
 	month = "0" + month;
 }
@@ -26,15 +30,17 @@ const getLastLogin = () => {
 let consoleInput = `<strong class="machine-console">dimaswehhh@daimessdn.github.io</strong><span class="console-input" contenteditable="true"></span>`;
 
 let consoleInputSelect = document.querySelectorAll('.console-input');
+let lastConsoleInput = consoleInputSelect[consoleInputSelect.length - 1];
 
 const generateConsoleInput = () => {
 	terminal_msg.innerHTML += consoleInput;
 	consoleInputSelect = document.querySelectorAll('.console-input');
-	consoleInputSelect[consoleInputSelect.length - 1].focus();
+	lastConsoleInput = consoleInputSelect[consoleInputSelect.length - 1];
+	lastConsoleInput.focus();
 };
 
 const focusOnConsoleInput = () => {
-	consoleInputSelect[consoleInputSelect.length - 1].focus();
+	lastConsoleInput.focus();
 };
 
 document.title = "@dimaswehhh " + datever + "";
@@ -65,7 +71,7 @@ const commands = {
 };
 
 const dummyExec_ = (command) => {
-	consoleInputSelect[consoleInputSelect.length - 1].removeAttribute("contenteditable");
+	lastConsoleInput.removeAttribute("contenteditable");
 
 	command = command.replace("./", "");
 	command = command.trim("<br>");
@@ -91,7 +97,7 @@ const dummyExec_ = (command) => {
 
 	consoleHistory.push(command);
 	generateConsoleInput();
-	consoleInputSelect[consoleInputSelect.length - 1].innerHTML = "";
+	lastConsoleInput.innerHTML = "";
 	historyIndex = consoleHistory.length;
 	window.scrollTo(0,document.body.scrollHeight);
 }
@@ -102,21 +108,71 @@ window.addEventListener('focus', () => {
 
 document.addEventListener('keydown', (event) => {
 	if (event.key === "Enter") {
-		dummyExec_(consoleInputSelect[consoleInputSelect.length - 1].textContent);
+		dummyExec_(lastConsoleInput.textContent);
 	} else if (event.key === "ArrowUp" && historyIndex > 0) {
 		historyIndex -= 1;
-		consoleInputSelect[consoleInputSelect.length - 1].innerHTML = consoleHistory[historyIndex];
+		lastConsoleInput.innerHTML = consoleHistory[historyIndex];
 		focusOnConsoleInput();
 	} else if (event.key === "ArrowDown" && historyIndex < consoleHistory.length) {
-		consoleInputSelect[consoleInputSelect.length - 1].innerHTML = consoleHistory[historyIndex];
+		lastConsoleInput.innerHTML = consoleHistory[historyIndex];
 		focusOnConsoleInput();
 		historyIndex += 1;
-	}
-
-	// console.log(consoleInputSelect[consoleInputSelect.length - 1].innerHTML);
+  }
 });
 
+// document.addEventListener("keyup", () => {
+// 	console.log(s);
+
+// 	// oRange = s.getRangeAt(startingSelection); //get the text range
+// 	// console.log(oRange)
+// 	// oRect = oRange.getBoundingClientRect()
+	
+// });
+
 document.addEventListener("DOMContentLoaded", () => {
-	getLastLogin();
+  getLastLogin();
 	generateConsoleInput();
+  
+  // s = window.getSelection();
+	// oRange = s.getRangeAt(0); //get the text range
+	// console.log(oRange)
+	// oRect = oRange.getBoundingClientRect()
+})
+
+document.addEventListener("keyup", (event) => {
+  event.preventDefault();
+
+  if (window.getSelection) {
+    caret = window.getSelection();
+    
+    if (caret.rangeCount) {
+      range = caret.getRangeAt(0);
+    }
+    
+    element = range.commonAncestorContainer.parentElement;
+
+    content = element.textContent;
+
+    modified = content.split();
+    
+    for (let i = 0; i < modified.length; i++) {
+      if (i == range.startOffset) {
+        modified[i] = "<span style='background-color: #fff; color: #300a24;'>"
+                + modified[i]
+                + "</span>";
+      }
+    }
+    
+    lastConsoleInput.innerHTML = modified.join('');
+    
+    console.log(modified);
+
+    return false;
+
+  } else if (document.selection) {
+    textRange = document.selection;
+    console.log(document.selection);
+  }
+
+  // console.log(textRange.parentElement)
 })
