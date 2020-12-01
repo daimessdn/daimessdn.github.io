@@ -128,7 +128,7 @@ const dummyExec_ = (command) => {
 			"height=500,width=400,location=no"
 		);
 
-		new Audio("Sosumi.aiff.wav").play();
+		new Audio("Blow.aiff.wav").play();
 		terminal_msg.innerHTML += `${command} opened.<br />`;
 	} else if (Object.keys(commands).includes(command)) {
 		commands[command]();
