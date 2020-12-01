@@ -4,8 +4,18 @@
   100% { opacity: 1; }
 }
 
+@keyframes icon-blink {
+  from {
+    background-color: #fff;
+    color: #300a24;
+  } to {
+    background-color: #300a24;
+    color: #fff;  
+  }
+}
+
 body {
-  font-family: "Space Mono", Arial, Helvetica, sans-serif;
+  font-family: "Space Mono", monospace;
   background-color: #300a24;
   color: #fff;
   font-size: medium;
@@ -45,13 +55,13 @@ body {
   display: inline;
   right: 8px;
   bottom: 8px;
-  opacity: 0;
-  transition: opacity 1s ease;
+  /* opacity: 0; */
+  /* transition: opacity 1s ease; */
 }
 
-#external-options:hover {
+/* #external-options:hover {
   opacity: 1;
-}
+} */
 
 .external-option-icon {
   cursor: pointer;

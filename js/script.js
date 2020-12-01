@@ -14,6 +14,8 @@ let terminalSession = {
 	}
 }
 
+const errorSound = new Audio('bell.oga');
+
 let consoleHistory = [];
 let historyIndex = consoleHistory.length;
 
@@ -148,15 +150,20 @@ window.addEventListener('focus', () => {
 document.addEventListener('keydown', (event) => {
 	if (event.key === "Enter") {
 		dummyExec_(consoleInput.children[1].value);
-	} else if (event.key === "ArrowUp" && historyIndex > 0) {
-		historyIndex -= 1;
-		consoleInput.children[1].value = consoleHistory[historyIndex];
+	} else if (event.key === "ArrowUp" && historyIndex >= 0) {
+		if (historyIndex === 0) {
+			errorSound.play();
+		} else {
+			historyIndex -= 1;
+			consoleInput.children[1].value = consoleHistory[historyIndex];
+		}
 	} else if (event.key === "ArrowDown") {
 		if (historyIndex < consoleHistory.length) {
 			consoleInput.children[1].value = consoleHistory[historyIndex];
 			historyIndex += 1;
 		} else {
 			consoleInput.children[1].value = "";
+			errorSound.play();
 		}
 	}
 
@@ -194,7 +201,7 @@ const terminalKeyboard = () => {
   consoleInput.children[1].innerHTML = HTMLContent;
 };
 
-document.addEventListener("click", (event) => {
+document.getElementById("external-options").addEventListener("click", (event) => {
 	let optionId = event.target.id;
 
 	if (optionId === "font-size") {
@@ -207,7 +214,13 @@ document.addEventListener("click", (event) => {
 		}
 	document.body.style.fontSize = terminalSession.config.fontSize;
 	consoleInput.children[1].style.fontSize = terminalSession.config.fontSize;
-	document.getElementsByClassName("console-input").style.fontSize = terminalSession.config.fontSize;
+	// document.getElementsByClassName("console-input").style.fontSize = terminalSession.config.fontSize;
 	document.getElementById("font-size").style.fontSize = terminalSession.config.fontSize;
+
 	}
+	
+	document.getElementById(optionId).style.animation = "icon-blink .3s ease";
+	setTimeout(() => {
+		document.getElementById(optionId).style.animation = "none";
+	}, 300);
 });
