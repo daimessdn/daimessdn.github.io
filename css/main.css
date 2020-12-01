@@ -4,11 +4,25 @@
   100% { opacity: 1; }
 }
 
+@keyframes icon-blink {
+  from {
+    background-color: #fff;
+    color: #300a24;
+  } to {
+    background-color: #300a24;
+    color: #fff;  
+  }
+}
+
 body {
-  font-family: "Space Mono", Arial, Helvetica, sans-serif;
+  font-family: "Space Mono", monospace;
   background-color: #300a24;
   color: #fff;
-  font-size: 14px;
+  font-size: medium;
+}
+
+#input {
+  margin: 0;
 }
 
 .machine-console {
@@ -16,19 +30,70 @@ body {
   outline: none;
 }
 
-.console-input::before {
-  content: ":$ ";
-  color: #fff;
-}
-
-.console-input::after {
-  content: "_";
+.machine-console::after {
+  content: ":~$";
   color: #fff;
   width: 3px;
-  animation: blink 1s ease infinite;
+}
+
+.console-input {
+  background-color: #300a24;
+  color: #fff;
+  border: none;
+  font-size: medium;
+  font-family: "Space Mono";
+  width: fit-content;
 }
 
 .console-input:focus {
   border: none;
   outline: none;
+}
+
+#external-options {
+  position: fixed;
+  display: inline;
+  right: 8px;
+  bottom: 8px;
+  /* opacity: 0; */
+  /* transition: opacity 1s ease; */
+}
+
+/* #external-options:hover {
+  opacity: 1;
+} */
+
+.external-option-icon {
+  cursor: pointer;
+  background-color: #300a24;
+  border: 1px solid #fff;
+  padding: 5px;
+  margin: 8px;
+  width: 25px;
+  height: 25px;
+  text-align: center;
+  vertical-align: middle;
+  font-weight: bold;
+  font-size: medium;
+}
+
+.external-option-icon a, .external-option-icon a:hover, .external-option-icon a:visited {
+  color: #fff;
+}
+
+a, a:hover, a:visited {
+  color: #fff;
+}
+
+#shortcut {
+  position: fixed;
+  top: 8px;
+  right: 8px;
+  padding: 5px;
+  border-radius: 5px;
+  background-color: #333333;
+}
+
+#shortcut kbd {
+  font-family: "Space Mono";
 }
