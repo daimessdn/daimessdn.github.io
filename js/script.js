@@ -6,9 +6,13 @@ let year = b.getFullYear() - a.getFullYear() + parseInt((a.getMonth() + b.getMon
 
 let terminal_msg = document.getElementById("container");
 
-let terminalConfig = {
-	fontSize: "medium"
-};
+let terminalSession = {
+	username: "dimaswehhh",
+	hostname: "daimessdn.github.io",
+	config: {
+		fontSize: "medium"
+	}
+}
 
 let consoleHistory = [];
 let historyIndex = consoleHistory.length;
@@ -26,12 +30,16 @@ if (month > 0) {
 let datever = year + "." + month;
 
 const getLastLogin = () => {
+	b = new Date();
 	terminal_msg.innerHTML += `Last login: ${b.toString()}<br />
 							   <br />
-							   Welcome to daimessdn.github.io<br />
+							   Welcome to ${terminalSession.hostname}<br />
 							   Current version: ${datever}<br /><br />
 							   Type <strong>help</strong> to display help information for using terminal<br />
-							   or visit <a href="https://github.com/daimessdn">https://github.com/daimessdn</a> for web documentation.
+							   or visit
+							    <a href="https://github.com/daimessdn" target="_blank">
+									https://github.com/daimessdn</a>
+								for web documentation.
 							   <br /><br />`;
 }
 
@@ -49,7 +57,7 @@ const focusOnConsoleInput = () => {
 	document.getElementById("input").children[1].focus();
 };
 
-document.title = "@dimaswehhh " + datever + "";
+document.title = "@" + terminalSession.username + " " + datever + "";
 
 const executable = ["journal", "codebread", "simpth", "generic-sensor", "las_converter"];
 
@@ -75,7 +83,7 @@ const commands = {
 		<strong>whoami</strong>\xa0\xa0\xa0display session user name<br />
 		`;
 	},
-	hostname: () => { terminal_msg.innerHTML += "<br>daimessdn.github.io</br>"; },
+	hostname: () => { terminal_msg.innerHTML += "<br>" + terminalSession.hostname + "</br>"; },
 	ls: () => {
 		terminal_msg.innerHTML += `<br />
 									<span style='color: #4E9A06; font-weight: bold;'>
@@ -93,11 +101,11 @@ const commands = {
 		}, 750);
 	},
 	test: () => { terminal_msg.innerHTML += "</br>"; },
-	whoami: () => { terminal_msg.innerHTML += "<br>dimaswehhh</br>"; },
+	whoami: () => { terminal_msg.innerHTML += "<br>" + terminalSession.username + "</br>"; },
 };
 
 const dummyExec_ = (command) => {
-	terminal_msg.innerHTML += `<strong class="machine-console">dimaswehhh@daimessdn.github.io</strong>
+	terminal_msg.innerHTML += `<strong class="machine-console">${terminalSession.username}@${terminalSession.hostname}</strong>
 							   <span class="console-input">${command}</span>`;
 
 	command = command.replace("./", "");
@@ -190,14 +198,16 @@ document.addEventListener("click", (event) => {
 	let optionId = event.target.id;
 
 	if (optionId === "font-size") {
-		if (terminalConfig.fontSize === "small") {
-			terminalConfig.fontSize = "medium";
-		} else if (terminalConfig.fontSize === "medium") {
-			terminalConfig.fontSize = "large";
+		if (terminalSession.config.fontSize === "small") {
+			terminalSession.config.fontSize = "medium";
+		} else if (terminalSession.config.fontSize === "medium") {
+			terminalSession.config.fontSize = "large";
 		} else {
-			terminalConfig.fontSize = "small";
+			terminalSession.config.fontSize = "small";
 		}
-	document.body.style.fontSize = terminalConfig.fontSize;
-	document.getElementById("font-size").style.fontSize = terminalConfig.fontSize;
+	document.body.style.fontSize = terminalSession.config.fontSize;
+	consoleInput.children[1].style.fontSize = terminalSession.config.fontSize;
+	document.getElementsByClassName("console-input").style.fontSize = terminalSession.config.fontSize;
+	document.getElementById("font-size").style.fontSize = terminalSession.config.fontSize;
 	}
 });
