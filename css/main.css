@@ -11,21 +11,28 @@ body {
   font-size: medium;
 }
 
+#input {
+  margin: 0;
+}
+
 .machine-console {
   color: #8AE234;
   outline: none;
 }
 
-.console-input::before {
-  content: ":$ ";
-  color: #fff;
-}
-
-.console-input::after {
-  content: "_";
+.machine-console::after {
+  content: ":~$";
   color: #fff;
   width: 3px;
-  animation: blink 1s ease infinite;
+}
+
+.console-input {
+  background-color: #300a24;
+  color: #fff;
+  border: none;
+  font-size: medium;
+  font-family: "Space Mono";
+  width: fit-content;
 }
 
 .console-input:focus {
@@ -38,6 +45,12 @@ body {
   display: inline;
   right: 8px;
   bottom: 8px;
+  opacity: 0;
+  transition: opacity 1s ease;
+}
+
+#external-options:hover {
+  opacity: 1;
 }
 
 .external-option-icon {
@@ -51,9 +64,13 @@ body {
   text-align: center;
   vertical-align: middle;
   font-weight: bold;
-  font-size: 15px;
+  font-size: medium;
 }
 
 .external-option-icon a, .external-option-icon a:hover, .external-option-icon a:visited {
+  color: #fff;
+}
+
+a, a:hover, a:visited {
   color: #fff;
 }

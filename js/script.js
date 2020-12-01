@@ -26,23 +26,27 @@ if (month > 0) {
 let datever = year + "." + month;
 
 const getLastLogin = () => {
-	terminal_msg.innerHTML += `Last login: ${b.toString()}<br /><br /> Welcome to daimessdn.github.io<br /> Current version: ${datever}<br /><br />`;
+	terminal_msg.innerHTML += `Last login: ${b.toString()}<br />
+							   <br />
+							   Welcome to daimessdn.github.io<br />
+							   Current version: ${datever}<br /><br />
+							   Type <strong>help</strong> to display help information for using terminal<br />
+							   or visit <a href="https://github.com/daimessdn">https://github.com/daimessdn</a> for web documentation.
+							   <br /><br />`;
 }
 
-let consoleInput = `<strong class="machine-console">dimaswehhh@daimessdn.github.io</strong><span class="console-input" contenteditable="true"></span>`;
+let consoleInput = document.getElementById("input");
 
 let consoleInputSelect = document.querySelectorAll('.console-input');
-let lastConsoleInput = consoleInputSelect[consoleInputSelect.length - 1];
-
 const generateConsoleInput = () => {
 	terminal_msg.innerHTML += consoleInput;
 	consoleInputSelect = document.querySelectorAll('.console-input');
-	lastConsoleInput = consoleInputSelect[consoleInputSelect.length - 1];
-	lastConsoleInput.focus();
+	consoleInput.children[1] = consoleInputSelect[consoleInputSelect.length - 1];
+	consoleInput.children[1].focus();
 };
 
 const focusOnConsoleInput = () => {
-	lastConsoleInput.focus();
+	document.getElementById("input").children[1].focus();
 };
 
 document.title = "@dimaswehhh " + datever + "";
@@ -50,10 +54,26 @@ document.title = "@dimaswehhh " + datever + "";
 const executable = ["journal", "codebread", "simpth", "generic-sensor", "las_converter"];
 
 const commands = {
-	clear: () => { terminal_msg.innerHTML = ""; },
+	clear: () => {
+		terminal_msg.innerHTML = "";
+	},
 	exit: () => {
 		terminal_msg.innerHTML += "<br />Bye!<br />";
 		setTimeout(window.close(), 300);
+	},
+	help: () => {
+		terminal_msg.innerHTML += `<br />
+		Here are commands you can play with.<br />
+		<br />
+		<strong>clear</strong>\xa0\xa0\xa0\xa0clear terminal console<br />
+		<strong>exit</strong>\xa0\xa0\xa0\xa0\xa0exit terminal session<br />
+		<strong>help</strong>\xa0\xa0\xa0\xa0\xa0display available commands help<br />
+		<strong>hostname</strong>\xa0display system host name<br />
+		<strong>ls</strong>\xa0\xa0\xa0\xa0\xa0\xa0\xa0list directory contents<br />
+		<strong>reset</strong>\xa0\xa0\xa0\xa0reset terminal session<br />
+		<strong>test</strong>\xa0\xa0\xa0\xa0\xa0testing command<br />
+		<strong>whoami</strong>\xa0\xa0\xa0display session user name<br />
+		`;
 	},
 	hostname: () => { terminal_msg.innerHTML += "<br>daimessdn.github.io</br>"; },
 	ls: () => {
@@ -63,17 +83,22 @@ const commands = {
 									</span><br />`;
 	},
 	reset: () => {
+		consoleInput.style.display = "none";
 		terminal_msg.innerHTML = "";
 		consoleHistory = [];
 		historyIndex = consoleHistory.length;
-		getLastLogin();
+		setTimeout(() => { 
+			getLastLogin();
+			consoleInput.style.display = "block";	
+		}, 750);
 	},
 	test: () => { terminal_msg.innerHTML += "</br>"; },
 	whoami: () => { terminal_msg.innerHTML += "<br>dimaswehhh</br>"; },
 };
 
 const dummyExec_ = (command) => {
-	lastConsoleInput.removeAttribute("contenteditable");
+	terminal_msg.innerHTML += `<strong class="machine-console">dimaswehhh@daimessdn.github.io</strong>
+							   <span class="console-input">${command}</span>`;
 
 	command = command.replace("./", "");
 	command = command.trim("<br>");
@@ -97,11 +122,15 @@ const dummyExec_ = (command) => {
 		terminal_msg.innerHTML += "<br />" + command + ": command not found<br />";
 	}
 
-	consoleHistory.push(command);
-	generateConsoleInput();
-	lastConsoleInput.innerHTML = "";
-	historyIndex = consoleHistory.length;
-	window.scrollTo(0,document.body.scrollHeight);
+	// generateConsoleInput();
+	consoleInput.children[1].value = "";
+
+	if (command != "") {
+		consoleHistory.push(command);
+		historyIndex = consoleHistory.length;
+	}
+
+	window.scrollTo(0, document.body.scrollHeight);
 }
 
 window.addEventListener('focus', () => {
@@ -110,21 +139,25 @@ window.addEventListener('focus', () => {
 
 document.addEventListener('keydown', (event) => {
 	if (event.key === "Enter") {
-		dummyExec_(lastConsoleInput.textContent);
+		dummyExec_(consoleInput.children[1].value);
 	} else if (event.key === "ArrowUp" && historyIndex > 0) {
 		historyIndex -= 1;
-		lastConsoleInput.innerHTML = consoleHistory[historyIndex];
-		focusOnConsoleInput();
-	} else if (event.key === "ArrowDown" && historyIndex < consoleHistory.length) {
-		lastConsoleInput.innerHTML = consoleHistory[historyIndex];
-		focusOnConsoleInput();
-		historyIndex += 1;
-  }
+		consoleInput.children[1].value = consoleHistory[historyIndex];
+	} else if (event.key === "ArrowDown") {
+		if (historyIndex < consoleHistory.length) {
+			consoleInput.children[1].value = consoleHistory[historyIndex];
+			historyIndex += 1;
+		} else {
+			consoleInput.children[1].value = "";
+		}
+	}
+
+	consoleInput.children[1].focus();
 });
 
 document.addEventListener("DOMContentLoaded", () => {
   getLastLogin();
-  generateConsoleInput();
+  // generateConsoleInput();
   // terminalKeyboard();
 })
 
@@ -137,11 +170,11 @@ const terminalKeyboard = () => {
     
    	  element = range.commonAncestorContainer.parentElement;
       content = element.textContent;
-	  HTMLContent = element.innerHTML.slice(0, range.startOffset)
+	  HTMLContent = element.value.slice(0, range.startOffset)
 					+ '<span style="background-color: #fff; color: #300a24">'
-					+ element.innerHTML.slice(range.startOffset, range.endOffset)
+					+ element.value.slice(range.startOffset, range.endOffset)
 					+ '</span>'
-					+ element.innerHTML.slice(range.endOffset, content.length);
+					+ element.value.slice(range.endOffset, content.length);
 	}
     
   } else if (document.selection) {
@@ -150,7 +183,7 @@ const terminalKeyboard = () => {
   }
 
   // console.log(textRange.parentElement)
-  lastConsoleInput.innerHTML = HTMLContent;
+  consoleInput.children[1].innerHTML = HTMLContent;
 };
 
 document.addEventListener("click", (event) => {
@@ -165,5 +198,6 @@ document.addEventListener("click", (event) => {
 			terminalConfig.fontSize = "small";
 		}
 	document.body.style.fontSize = terminalConfig.fontSize;
+	document.getElementById("font-size").style.fontSize = terminalConfig.fontSize;
 	}
 });
