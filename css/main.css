@@ -51,7 +51,7 @@ body {
 }
 
 #external-options {
-  position: absolute;
+  position: fixed;
   display: inline;
   right: 8px;
   bottom: 8px;
@@ -83,4 +83,17 @@ body {
 
 a, a:hover, a:visited {
   color: #fff;
+}
+
+#shortcut {
+  position: fixed;
+  top: 8px;
+  right: 8px;
+  padding: 5px;
+  border-radius: 5px;
+  background-color: #333333;
+}
+
+#shortcut kbd {
+  font-family: "Space Mono";
 }

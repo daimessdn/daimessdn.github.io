@@ -108,7 +108,12 @@ const commands = {
 
 const dummyExec_ = (command) => {
 	terminal_msg.innerHTML += `<strong class="machine-console">${terminalSession.username}@${terminalSession.hostname}</strong>
-							   <span class="console-input">${command}</span>`;
+	<span class="console-input">${command}</span>`;
+	
+	if (command != "") {
+		consoleHistory.push(command);
+		historyIndex = consoleHistory.length;
+	}
 
 	command = command.replace("./", "");
 	command = command.trim("<br>");
@@ -123,6 +128,7 @@ const dummyExec_ = (command) => {
 			"height=500,width=400,location=no"
 		);
 
+		new Audio("Sosumi.aiff.wav").play();
 		terminal_msg.innerHTML += `${command} opened.<br />`;
 	} else if (Object.keys(commands).includes(command)) {
 		commands[command]();
@@ -134,11 +140,6 @@ const dummyExec_ = (command) => {
 
 	// generateConsoleInput();
 	consoleInput.children[1].value = "";
-
-	if (command != "") {
-		consoleHistory.push(command);
-		historyIndex = consoleHistory.length;
-	}
 
 	window.scrollTo(0, document.body.scrollHeight);
 }
@@ -166,6 +167,8 @@ document.addEventListener('keydown', (event) => {
 			errorSound.play();
 		}
 	}
+
+	document.getElementById("shortcut").innerHTML = "<kbd>" + event.key + "</kbd>";
 
 	consoleInput.children[1].focus();
 });
