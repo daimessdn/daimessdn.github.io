@@ -85,6 +85,13 @@ const commands = {
 		<strong>whoami</strong>\xa0\xa0\xa0display session user name<br />
 		`;
 	},
+	history: () => {
+		for (let i = 0; i < consoleHistory.length - 1; i++) {
+			terminal_msg.innerHTML += "<br />" + (i + 1) + " " + consoleHistory[i];
+		}
+
+		terminal_msg.innerHTML += "<br />";
+	},
 	hostname: () => { terminal_msg.innerHTML += "<br>" + terminalSession.hostname + "</br>"; },
 	ls: () => {
 		terminal_msg.innerHTML += `<br />
@@ -92,7 +99,22 @@ const commands = {
 										${executable.join("\xa0\xa0\xa0")}
 									</span><br />`;
 	},
-	reset: () => {
+	reboot: () => {
+		setTimeout(() => {
+			document.body.style.backgroundColor = "#000";
+			document.getElementById("external-options").style.display = "none";
+			document.getElementById("shortcut").style.display = "none";
+			commands.reset(5000);
+			setTimeout(() => {
+				document.body.style.backgroundColor = "#300a24";
+			}, 4500, async=true)
+			setTimeout(() => {
+				document.getElementById("external-options").style.display = "block";
+				document.getElementById("shortcut").style.display = "block";
+			}, 4750, async=true);
+		}, 300);
+	},
+	reset: (bootTime = 750) => {
 		consoleInput.style.display = "none";
 		terminal_msg.innerHTML = "";
 		consoleHistory = [];
@@ -100,7 +122,7 @@ const commands = {
 		setTimeout(() => { 
 			getLastLogin();
 			consoleInput.style.display = "block";	
-		}, 750);
+		}, bootTime);
 	},
 	test: () => { terminal_msg.innerHTML += "</br>"; },
 	whoami: () => { terminal_msg.innerHTML += "<br>" + terminalSession.username + "</br>"; },
@@ -110,10 +132,12 @@ const dummyExec_ = (command) => {
 	terminal_msg.innerHTML += `<strong class="machine-console">${terminalSession.username}@${terminalSession.hostname}</strong>
 	<span class="console-input">${command}</span>`;
 	
-	if (command != "") {
+	if (command.trim() != "") {
 		consoleHistory.push(command);
 		historyIndex = consoleHistory.length;
 	}
+	
+	command = (consoleInput.children[1].value).split(" ")[0]
 
 	command = command.replace("./", "");
 	command = command.trim("<br>");
@@ -136,6 +160,7 @@ const dummyExec_ = (command) => {
 		terminal_msg.innerHTML += "</br>";
 	} else {
 		terminal_msg.innerHTML += "<br />" + command + ": command not found<br />";
+		new Audio("Sosumi.aiff.wav").play();
 	}
 
 	// generateConsoleInput();
@@ -165,6 +190,14 @@ document.addEventListener('keydown', (event) => {
 		} else {
 			consoleInput.children[1].value = "";
 			errorSound.play();
+		}
+	} else if (event.key == "ArrowLeft") {
+		if (window.getSelection) {
+			sel = window.getSelection();
+			
+			if (sel.rangeCount) {
+				console.log(sel.getRangeAt(0).commonAncestorContainer.children);
+			}
 		}
 	}
 
