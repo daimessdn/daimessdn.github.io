@@ -14,8 +14,13 @@
   }
 }
 
+@font-face {
+  font-family: "Ahamono";
+  src: url('../fonts/iosevka-extended.ttf');
+}
+
 body {
-  font-family: "Space Mono", monospace;
+  font-family: "Ahamono", monospace;
   background-color: #300a24;
   color: #fff;
   font-size: medium;
@@ -40,7 +45,7 @@ body {
   background-color: #300a24;
   color: #fff;
   border: none;
-  font-family: "Space Mono";
+  font-family: "Ahamono";
   width: fit-content;
 }
 
@@ -94,5 +99,5 @@ a, a:hover, a:visited {
 }
 
 #shortcut kbd {
-  font-family: "Space Mono";
+  font-family: "Ahamono";
 }
