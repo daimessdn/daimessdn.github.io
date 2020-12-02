@@ -14,7 +14,7 @@ let terminalSession = {
 	}
 }
 
-const errorSound = new Audio('bell.oga');
+const errorSound = new Audio('sounds/bell.oga');
 
 let consoleHistory = [];
 let historyIndex = consoleHistory.length;
@@ -89,7 +89,7 @@ const dummyExec_ = (command) => {
 			"height=500,width=400,location=no"
 		);
 
-		new Audio("Blow.aiff.wav").play();
+		new Audio("sounds/Blow.aiff.wav").play();
 		terminal_msg.innerHTML += `${command} opened.<br />`;
 	} else if (Object.keys(commands).includes(command)) {
 		commands[command].execute();
@@ -97,7 +97,7 @@ const dummyExec_ = (command) => {
 		terminal_msg.innerHTML += "</br>";
 	} else {
 		terminal_msg.innerHTML += "<br />" + command + ": command not found<br />";
-		new Audio("Sosumi.aiff.wav").play();
+		new Audio("sounds/Sosumi.aiff.wav").play();
 	}
 
 	// generateConsoleInput();
