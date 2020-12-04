@@ -10,7 +10,7 @@ let terminalSession = {
 	username: "dimaswehhh",
 	hostname: "daimessdn.github.io",
 	config: {
-		fontSize: "medium"
+		fontSize: "small"
 	}
 }
 
@@ -39,8 +39,8 @@ const getLastLogin = () => {
 							   Current version: ${datever}<br /><br />
 							   Type <strong>help</strong> to display help information for using terminal<br />
 							   or visit
-							    <a href="https://github.com/daimessdn" target="_blank">
-									https://github.com/daimessdn</a>
+							    <a href="https://github.com/daimessdn/daimessdn.github.io" target="_blank">
+									https://github.com/daimessdn/daimessdn.github.io</a><br />
 								for web documentation.
 							   <br /><br />`;
 }
@@ -61,20 +61,29 @@ const focusOnConsoleInput = () => {
 
 document.title = "@" + terminalSession.username + " " + datever + "";
 
-const executable = ["journal", "codebread", "simpth", "generic-sensor", "las_converter"];
-
-
+let executable = ["journal", "codebread", "simpth", "generic-sensor", "las_converter"];
 
 const dummyExec_ = (command) => {
 	terminal_msg.innerHTML += `<strong class="machine-console">${terminalSession.username}@${terminalSession.hostname}</strong>
 	<span class="console-input">${command}</span>`;
+
+	command = command.trim();
 	
-	if (command.trim() != "") {
+	if (command != "" && command != consoleHistory[consoleHistory.length - 1]) {
 		consoleHistory.push(command);
 		historyIndex = consoleHistory.length;
 	}
 	
-	command = (consoleInput.children[1].value).split(" ")[0]
+	query = command.split(" ")
+
+	console.log(query)
+	command = query[0]
+	
+	query.shift();
+	args = query;
+
+	console.log(command);
+	console.log(args);
 
 	command = command.replace("./", "");
 	command = command.trim("<br>");
@@ -92,7 +101,7 @@ const dummyExec_ = (command) => {
 		new Audio("sounds/Blow.aiff.wav").play();
 		terminal_msg.innerHTML += `${command} opened.<br />`;
 	} else if (Object.keys(commands).includes(command)) {
-		commands[command].execute();
+		commands[command].execute(args);
 	} else if (command == "") {
 		terminal_msg.innerHTML += "</br>";
 	} else {
@@ -105,96 +114,3 @@ const dummyExec_ = (command) => {
 
 	window.scrollTo(0, document.body.scrollHeight);
 }
-
-window.addEventListener('focus', () => {
-	focusOnConsoleInput();
-});
-
-document.addEventListener('keydown', (event) => {
-	if (event.key === "Enter") {
-		dummyExec_(consoleInput.children[1].value);
-	} else if (event.key === "ArrowUp" && historyIndex >= 0) {
-		if (historyIndex === 0) {
-			errorSound.cloneNode().play();
-		} else {
-			historyIndex -= 1;
-			consoleInput.children[1].value = consoleHistory[historyIndex];
-		}
-	} else if (event.key === "ArrowDown") {
-		if (historyIndex < consoleHistory.length) {
-			consoleInput.children[1].value = consoleHistory[historyIndex];
-			historyIndex += 1;
-		} else {
-			consoleInput.children[1].value = "";
-			errorSound.cloneNode().play();
-
-		}
-	} else if (event.key == "ArrowLeft") {
-		if (window.getSelection) {
-			sel = window.getSelection();
-			
-			if (sel.rangeCount) {
-				console.log(sel.getRangeAt(0).commonAncestorContainer.children);
-			}
-		}
-	}
-
-	document.getElementById("shortcut").innerHTML = "<kbd>" + event.key + "</kbd>";
-
-	consoleInput.children[1].focus();
-});
-
-document.addEventListener("DOMContentLoaded", () => {
-  getLastLogin();
-  // generateConsoleInput();
-  // terminalKeyboard();
-})
-
-const terminalKeyboard = () => {
-  if (window.getSelection) {
-    caret = window.getSelection();
-    
-    if (caret.rangeCount) {
-      range = caret.getRangeAt(0);
-    
-   	  element = range.commonAncestorContainer.parentElement;
-      content = element.textContent;
-	  HTMLContent = element.value.slice(0, range.startOffset)
-					+ '<span style="background-color: #fff; color: #300a24">'
-					+ element.value.slice(range.startOffset, range.endOffset)
-					+ '</span>'
-					+ element.value.slice(range.endOffset, content.length);
-	}
-    
-  } else if (document.selection) {
-      textRange = document.selection;
-      console.log(document.selection);
-  }
-
-  // console.log(textRange.parentElement)
-  consoleInput.children[1].innerHTML = HTMLContent;
-};
-
-document.getElementById("external-options").addEventListener("click", (event) => {
-	let optionId = event.target.id;
-
-	if (optionId === "font-size") {
-		if (terminalSession.config.fontSize === "small") {
-			terminalSession.config.fontSize = "medium";
-		} else if (terminalSession.config.fontSize === "medium") {
-			terminalSession.config.fontSize = "large";
-		} else {
-			terminalSession.config.fontSize = "small";
-		}
-	document.body.style.fontSize = terminalSession.config.fontSize;
-	consoleInput.children[1].style.fontSize = terminalSession.config.fontSize;
-	// document.getElementsByClassName("console-input").style.fontSize = terminalSession.config.fontSize;
-	document.getElementById("font-size").style.fontSize = terminalSession.config.fontSize;
-
-	}
-	
-	document.getElementById(optionId).style.animation = "icon-blink .3s ease";
-	setTimeout(() => {
-		document.getElementById(optionId).style.animation = "none";
-	}, 300);
-});
