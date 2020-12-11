@@ -58,8 +58,8 @@ document.getElementById("external-options").addEventListener("click", (event) =>
 	
 	document.body.style.fontSize = size;
 	consoleInput.children[1].style.fontSize = size;
-	// document.getElementsByClassName("console-input").style.fontSize = size;
-	document.getElementById("font-size").style.fontSize = size;
+	document.querySelector(".console-input").style.fontSize = size;
+	document.querySelector("#font-size").style.fontSize = size;
 	}
 	
 	document.getElementById(optionId).style.animation = "icon-blink .3s ease";

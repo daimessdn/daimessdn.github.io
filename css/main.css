@@ -106,3 +106,7 @@ a, a:hover, a:visited {
 #shortcut kbd {
   font-family: "Necto Mono";
 }
+
+input {
+  font-size: 16px;
+}
