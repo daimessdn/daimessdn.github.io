@@ -14,11 +14,16 @@
   }
 }
 
+@font-face {
+  font-family: "Necto Mono";
+  src: url('../fonts/NectoMono-Regular.otf');
+}
+
 body {
-  font-family: "Space Mono", monospace;
+  font-family: "Necto Mono", monospace;
   background-color: #300a24;
   color: #fff;
-  font-size: medium;
+  font-size: 16px;
 }
 
 #input {
@@ -40,8 +45,7 @@ body {
   background-color: #300a24;
   color: #fff;
   border: none;
-  font-size: medium;
-  font-family: "Space Mono";
+  font-family: "Necto Mono";
   width: fit-content;
 }
 
@@ -59,9 +63,9 @@ body {
   /* transition: opacity 1s ease; */
 }
 
-/* #external-options:hover {
+#external-options:hover {
   opacity: 1;
-} */
+}
 
 .external-option-icon {
   cursor: pointer;
@@ -71,14 +75,19 @@ body {
   margin: 8px;
   width: 25px;
   height: 25px;
-  text-align: center;
-  vertical-align: middle;
   font-weight: bold;
-  font-size: medium;
+  font-size: 16px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
-.external-option-icon a, .external-option-icon a:hover, .external-option-icon a:visited {
+.external-option-icon a,
+.external-option-icon a:hover,
+.external-option-icon a:visited {
   color: #fff;
+  text-decoration: none;
 }
 
 a, a:hover, a:visited {
@@ -95,5 +104,5 @@ a, a:hover, a:visited {
 }
 
 #shortcut kbd {
-  font-family: "Space Mono";
+  font-family: "Necto Mono";
 }
