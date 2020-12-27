@@ -24,6 +24,7 @@ body {
   background-color: #300a24;
   color: #fff;
   font-size: 16px;
+  line-height: 1.2;
 }
 
 #input {
@@ -59,8 +60,8 @@ body {
   display: inline;
   right: 8px;
   bottom: 8px;
-  /* opacity: 0; */
-  /* transition: opacity 1s ease; */
+  opacity: 0;
+  transition: opacity .5s ease;
 }
 
 #external-options:hover {

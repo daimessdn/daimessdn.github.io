@@ -4,7 +4,7 @@ let b = new Date();
 let month = parseInt((b.getMonth() - a.getMonth()) % 12);
 let year = b.getFullYear() - a.getFullYear() + parseInt((a.getMonth() + b.getMonth()) / 12);
 
-let terminal_msg = document.getElementById("container");
+let terminal_msg = document.querySelector("#container");
 
 let terminalSession = {
 	username: "dimaswehhh",
@@ -14,7 +14,10 @@ let terminalSession = {
 	}
 }
 
+// sound effects
 const errorSound = new Audio('sounds/bell.oga');
+const openSound = new Audio("sounds/dialog-question.oga");
+const commandNotFoundSound = new Audio("sounds/dialog-error.oga");
 
 let consoleHistory = [];
 let historyIndex = consoleHistory.length;
@@ -98,7 +101,7 @@ const dummyExec_ = (command) => {
 			"height=500,width=400,location=no"
 		);
 
-		new Audio("sounds/dialog-question.oga").play();
+		openSound.play();
 		terminal_msg.innerHTML += `${command} opened.<br />`;
 	} else if (Object.keys(commands).includes(command)) {
 		commands[command].execute(args);
@@ -106,7 +109,7 @@ const dummyExec_ = (command) => {
 		terminal_msg.innerHTML += "</br>";
 	} else {
 		terminal_msg.innerHTML += "<br />" + command + ": command not found<br />";
-		new Audio("sounds/dialog-error.oga").play();
+		commandNotFoundSound.play();
 	}
 
 	// generateConsoleInput();

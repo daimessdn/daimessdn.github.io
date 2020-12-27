@@ -67,3 +67,16 @@ document.getElementById("external-options").addEventListener("click", (event) =>
 		document.getElementById(optionId).style.animation = "none";
 	}, 300);
 });
+
+let timeout;
+
+document.addEventListener("mousemove", () => {
+	let externalOption = document.querySelector("#external-options");
+
+	externalOption.style.opacity = 1;
+	clearTimeout(timeout);
+	
+  timeout = setTimeout(() => {
+		externalOption.style.opacity = 0;
+	}, 5000);
+});
