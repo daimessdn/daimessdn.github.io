@@ -64,7 +64,8 @@ const focusOnConsoleInput = () => {
 
 document.title = "@" + terminalSession.username + " " + datever + "";
 
-let executable = ["journal", "codebread", "simpth", "generic-sensor", "las_converter"];
+const executable = ["journal", "codebread", "simpth", "generic-sensor", "las_converter"];
+const oilshit = ["gloss-oleum"]
 
 const dummyExec_ = (command) => {
 	terminal_msg.innerHTML += `<strong class="machine-console">${terminalSession.username}@${terminalSession.hostname}</strong>
@@ -97,6 +98,17 @@ const dummyExec_ = (command) => {
 		
 		window.open(
 			window.location.origin + "/" + command,
+			"_blank",
+			"height=500,width=400,location=no"
+		);
+
+		openSound.play();
+		terminal_msg.innerHTML += `${command} opened.<br />`;
+	} else if (oilshit.includes(command)) {
+		terminal_msg.innerHTML += `<br />Opening <em>${command}</em>, please wait...<br />`;
+		
+		window.open(
+			"https://oilshit.github.io" + "/" + command,
 			"_blank",
 			"height=500,width=400,location=no"
 		);
