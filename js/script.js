@@ -46,7 +46,7 @@ const getLastLogin = () => {
 									https://github.com/daimessdn/daimessdn.github.io</a><br />
 								for web documentation.
 							   <br /><br />`;
-}
+};
 
 let consoleInput = document.getElementById("input");
 
