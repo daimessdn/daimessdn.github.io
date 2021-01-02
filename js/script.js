@@ -1,7 +1,7 @@
 const a = new Date("09/02/1998");
 let b = new Date();
 
-let month = parseInt((b.getMonth() - a.getMonth()) % 12);
+let month = parseInt((b.getMonth() - (-12 + a.getMonth())) % 12);
 let year = b.getFullYear() - a.getFullYear() + parseInt((a.getMonth() + b.getMonth()) / 12);
 
 let terminal_msg = document.querySelector("#container");
