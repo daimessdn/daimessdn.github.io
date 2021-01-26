@@ -78,13 +78,8 @@ const dummyExec_ = (command) => {
 		historyIndex = consoleHistory.length;
 	}
 	
-	query = command.split(" ")
-
-	console.log(query)
-	command = query[0]
-	
-	query.shift();
-	args = query;
+	args = command.substr(command.indexOf(' ') + 1);
+	command = command.substr(0, command.indexOf(' '));
 
 	console.log(command);
 	console.log(args);

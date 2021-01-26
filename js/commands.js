@@ -5,6 +5,12 @@ const commands = {
             terminal_msg.innerHTML = "";
         }
     },
+    echo: {
+        arguments: [],
+        execute: (arguments) => {
+                terminal_msg.innerHTML += "<br />" + args + "<br />";
+        }
+    },
     exit: {
         arguments: [],
         execute: (arguments) => {
@@ -19,6 +25,7 @@ const commands = {
             Here are commands you can play with.<br />
             <br />
             <strong>clear</strong>\xa0\xa0\xa0\xa0clear terminal console<br />
+            <strong>echo</strong>\xa0\xa0\xa0\xa0\xa0display a line of text<br />
             <strong>exit</strong>\xa0\xa0\xa0\xa0\xa0exit terminal session<br />
             <strong>help</strong>\xa0\xa0\xa0\xa0\xa0display available commands help<br />
             <strong>history</strong>\xa0\xa0display console history<br />
