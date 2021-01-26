@@ -64,8 +64,8 @@ const focusOnConsoleInput = () => {
 
 document.title = "@" + terminalSession.username + " " + datever + "";
 
-const executable = ["journal", "codebread", "simpth", "generic-sensor", "las_converter"];
-const oilshit = ["gloss-oleum"]
+const executable = ["journal", "codebread", "simpth", "generic-sensor"];
+const oilshit = ["gloss-oleum", "las_converter"]
 
 const dummyExec_ = (command) => {
 	terminal_msg.innerHTML += `<strong class="machine-console">${terminalSession.username}@${terminalSession.hostname}</strong>
