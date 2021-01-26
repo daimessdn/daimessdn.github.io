@@ -72,14 +72,17 @@ const dummyExec_ = (command) => {
 	<span class="console-input">${command}</span>`;
 
 	command = command.trim();
+	args = "";
 	
 	if (command != "" && command != consoleHistory[consoleHistory.length - 1]) {
 		consoleHistory.push(command);
 		historyIndex = consoleHistory.length;
 	}
 	
-	args = command.substr(command.indexOf(' ') + 1);
-	command = command.substr(0, command.indexOf(' '));
+	if (command.includes(" ")) {
+		args = command.substr(command.indexOf(' ') + 1);
+		command = command.substr(0, command.indexOf(' '));
+	}
 
 	console.log(command);
 	console.log(args);

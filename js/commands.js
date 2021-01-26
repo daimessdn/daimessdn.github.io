@@ -34,7 +34,7 @@ const commands = {
             <strong>reset</strong>\xa0\xa0\xa0\xa0reset terminal session<br />
             <strong>reboot</strong>\xa0\xa0\xa0reset terminal machine (I mean, not real machine)<br />
             <strong>test</strong>\xa0\xa0\xa0\xa0\xa0testing command<br />
-            <strong>uname</strong>\xa0\xa0\xa0\xa0\xa0display small system info<br />
+            <strong>uname</strong>\xa0\xa0\xa0\xa0display small system info<br />
             <strong>whoami</strong>\xa0\xa0\xa0display session user name<br />
             `;
         }
@@ -66,7 +66,7 @@ const commands = {
         execute: (arguments) => {
             terminal_msg.innerHTML += `<br />
                                         <span style='color: #4E9A06; font-weight: bold;'>
-                                            ${executable.join("\xa0\xa0\xa0")}
+                                            ${executable.join("\xa0\xa0\xa0") + "\xa0\xa0\xa0" + oilshit.join("\xa0\xa0\xa0")}
                                         </span><br />`;
         }
     },
@@ -104,6 +104,10 @@ const commands = {
     test: {
         arguments: [],
         execute: (arguments) => { terminal_msg.innerHTML += "</br>"; }
+    },
+    uname: {
+        arguments: [],
+        execute: (arguments) => { terminal_msg.innerHTML += "<br />(Not) Linux  <br />"; }
     },
     whoami: {
         arguments: [],
