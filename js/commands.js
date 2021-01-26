@@ -104,6 +104,12 @@ const commands = {
         arguments: [],
         execute: (arguments) => { terminal_msg.innerHTML += "</br>"; }
     },
+    uname: {
+        arguments: [],
+        execute: (arguments) => {
+                terminal_msg.innerHTML += "<br />(Not) Linux<br />";
+        }
+    },
     whoami: {
         arguments: [],
         execute: (arguments) => { terminal_msg.innerHTML += "<br>" + terminalSession.username + "</br>"; },
