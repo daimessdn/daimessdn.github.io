@@ -27,6 +27,7 @@ const commands = {
             <strong>reset</strong>\xa0\xa0\xa0\xa0reset terminal session<br />
             <strong>reboot</strong>\xa0\xa0\xa0reset terminal machine (I mean, not real machine)<br />
             <strong>test</strong>\xa0\xa0\xa0\xa0\xa0testing command<br />
+            <strong>uname</strong>\xa0\xa0\xa0\xa0\xa0display small system info<br />
             <strong>whoami</strong>\xa0\xa0\xa0display session user name<br />
             `;
         }
