@@ -95,7 +95,7 @@ const dummyExec_ = (command) => {
 		terminal_msg.innerHTML += `<br />Opening <em>${command}</em>, please wait...<br />`;
 		
 		window.open(
-			window.location.origin + "/" + command,
+			"https://daimessdn.github.io/" + command,
 			"_blank",
 			"height=500,width=400,location=no"
 		);
