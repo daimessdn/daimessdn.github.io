@@ -64,27 +64,25 @@ const focusOnConsoleInput = () => {
 
 document.title = "@" + terminalSession.username + " " + datever + "";
 
-const executable = ["journal", "codebread", "simpth", "generic-sensor", "las_converter"];
-const oilshit = ["gloss-oleum"]
+const executable = ["journal", "codebread", "simpth", "generic-sensor"];
+const oilshit = ["gloss-oleum", "las_converter"]
 
 const dummyExec_ = (command) => {
 	terminal_msg.innerHTML += `<strong class="machine-console">${terminalSession.username}@${terminalSession.hostname}</strong>
 	<span class="console-input">${command}</span>`;
 
 	command = command.trim();
+	args = "";
 	
 	if (command != "" && command != consoleHistory[consoleHistory.length - 1]) {
 		consoleHistory.push(command);
 		historyIndex = consoleHistory.length;
 	}
 	
-	query = command.split(" ")
-
-	console.log(query)
-	command = query[0]
-	
-	query.shift();
-	args = query;
+	if (command.includes(" ")) {
+		args = command.substr(command.indexOf(' ') + 1);
+		command = command.substr(0, command.indexOf(' '));
+	}
 
 	console.log(command);
 	console.log(args);
@@ -97,7 +95,7 @@ const dummyExec_ = (command) => {
 		terminal_msg.innerHTML += `<br />Opening <em>${command}</em>, please wait...<br />`;
 		
 		window.open(
-			window.location.origin + "/" + command,
+			"https://daimessdn.github.io/" + command,
 			"_blank",
 			"height=500,width=400,location=no"
 		);

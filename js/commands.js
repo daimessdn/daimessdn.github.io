@@ -5,6 +5,10 @@ const commands = {
             terminal_msg.innerHTML = "";
         }
     },
+    echo: {
+        arguments: [],
+        execute: (arguments) => {
+                terminal_msg.innerHTML += "<br />" + args + "<br />";
     date: {
         arguments: [],
         execute: (arguments) => {
@@ -25,6 +29,7 @@ const commands = {
             Here are commands you can play with.<br />
             <br />
             <strong>clear</strong>\xa0\xa0\xa0\xa0clear terminal console<br />
+            <strong>echo</strong>\xa0\xa0\xa0\xa0\xa0display a line of text<br />
             <strong>date</strong>\xa0\xa0\xa0\xa0show current date<br />
             <strong>exit</strong>\xa0\xa0\xa0\xa0\xa0exit terminal session<br />
             <strong>help</strong>\xa0\xa0\xa0\xa0\xa0display available commands help<br />
@@ -34,6 +39,7 @@ const commands = {
             <strong>reset</strong>\xa0\xa0\xa0\xa0reset terminal session<br />
             <strong>reboot</strong>\xa0\xa0\xa0reset terminal machine (I mean, not real machine)<br />
             <strong>test</strong>\xa0\xa0\xa0\xa0\xa0testing command<br />
+            <strong>uname</strong>\xa0\xa0\xa0\xa0display small system info<br />
             <strong>whoami</strong>\xa0\xa0\xa0display session user name<br />
             `;
         }
@@ -65,7 +71,7 @@ const commands = {
         execute: (arguments) => {
             terminal_msg.innerHTML += `<br />
                                         <span style='color: #4E9A06; font-weight: bold;'>
-                                            ${executable.join("\xa0\xa0\xa0")}
+                                            ${executable.join("\xa0\xa0\xa0") + "\xa0\xa0\xa0" + oilshit.join("\xa0\xa0\xa0")}
                                         </span><br />`;
         }
     },
