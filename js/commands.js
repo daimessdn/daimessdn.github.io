@@ -9,6 +9,10 @@ const commands = {
         arguments: [],
         execute: (arguments) => {
                 terminal_msg.innerHTML += "<br />" + args + "<br />";
+    date: {
+        arguments: [],
+        execute: (arguments) => {
+                terminal_msg.innerHTML += "<br />" + new Date() + "<br />";
         }
     },
     exit: {
@@ -26,6 +30,7 @@ const commands = {
             <br />
             <strong>clear</strong>\xa0\xa0\xa0\xa0clear terminal console<br />
             <strong>echo</strong>\xa0\xa0\xa0\xa0\xa0display a line of text<br />
+            <strong>date</strong>\xa0\xa0\xa0\xa0show current date<br />
             <strong>exit</strong>\xa0\xa0\xa0\xa0\xa0exit terminal session<br />
             <strong>help</strong>\xa0\xa0\xa0\xa0\xa0display available commands help<br />
             <strong>history</strong>\xa0\xa0display console history<br />
@@ -107,7 +112,9 @@ const commands = {
     },
     uname: {
         arguments: [],
-        execute: (arguments) => { terminal_msg.innerHTML += "<br />(Not) Linux  <br />"; }
+        execute: (arguments) => {
+                terminal_msg.innerHTML += "<br />(Not) Linux<br />";
+        }
     },
     whoami: {
         arguments: [],
