@@ -9,6 +9,8 @@ const commands = {
         arguments: [],
         execute: (arguments) => {
                 terminal_msg.innerHTML += "<br />" + args + "<br />";
+        }
+    },
     date: {
         arguments: [],
         execute: (arguments) => {
