@@ -10,12 +10,18 @@ const commands = {
     execute: (arguments) => {
       terminal_msg.innerHTML += "<br />" + args + "<br />";
     },
-  },
-  exit: {
-    arguments: [],
-    execute: (arguments) => {
-      terminal_msg.innerHTML += "<br />Bye!<br />";
-      setTimeout(window.close(), 300);
+    date: {
+        arguments: [],
+        execute: (arguments) => {
+                terminal_msg.innerHTML += "<br />" + new Date() + "<br />";
+        }
+    },
+    exit: {
+        arguments: [],
+        execute: (arguments) => {
+                terminal_msg.innerHTML += "<br />Bye!<br />";
+                setTimeout(window.close(), 300);
+        }
     },
   },
   help: {
@@ -26,6 +32,7 @@ const commands = {
             <br />
             <strong>clear</strong>\xa0\xa0\xa0\xa0clear terminal console<br />
             <strong>echo</strong>\xa0\xa0\xa0\xa0\xa0display a line of text<br />
+            <strong>date</strong>\xa0\xa0\xa0\xa0show current date<br />
             <strong>exit</strong>\xa0\xa0\xa0\xa0\xa0exit terminal session<br />
             <strong>help</strong>\xa0\xa0\xa0\xa0\xa0display available commands help<br />
             <strong>history</strong>\xa0\xa0display console history<br />
