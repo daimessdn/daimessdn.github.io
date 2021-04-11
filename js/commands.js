@@ -9,20 +9,20 @@ const commands = {
     arguments: [],
     execute: (arguments) => {
       terminal_msg.innerHTML += "<br />" + args + "<br />";
-    },
-    date: {
-        arguments: [],
-        execute: (arguments) => {
-                terminal_msg.innerHTML += "<br />" + new Date() + "<br />";
-        }
-    },
-    exit: {
-        arguments: [],
-        execute: (arguments) => {
-                terminal_msg.innerHTML += "<br />Bye!<br />";
-                setTimeout(window.close(), 300);
-        }
-    },
+    }
+   },
+  date: {
+    arguments: [],
+    execute: (arguments) => {
+      terminal_msg.innerHTML += "<br />" + new Date() + "<br />";
+    }
+  },
+  exit: {
+    arguments: [],
+    execute: (arguments) => {
+      terminal_msg.innerHTML += "<br />Bye!<br />";
+      setTimeout(window.close(), 300);
+    }
   },
   help: {
     arguments: [],
