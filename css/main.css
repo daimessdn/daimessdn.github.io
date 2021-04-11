@@ -1,22 +1,29 @@
 @keyframes blink {
-  0%   { opacity: 1; }
-  50%  { opacity: 0; }
-  100% { opacity: 1; }
+  0% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
 }
 
 @keyframes icon-blink {
   from {
     background-color: #fff;
     color: #300a24;
-  } to {
+  }
+  to {
     background-color: #300a24;
-    color: #fff;  
+    color: #fff;
   }
 }
 
 @font-face {
   font-family: "Necto Mono";
-  src: url('../fonts/NectoMono-Regular.otf');
+  src: url("../fonts/NectoMono-Regular.otf");
 }
 
 body {
@@ -32,7 +39,7 @@ body {
 }
 
 .machine-console {
-  color: #8AE234;
+  color: #8ae234;
   outline: none;
 }
 
@@ -61,7 +68,7 @@ body {
   right: 8px;
   bottom: 8px;
   opacity: 0;
-  transition: opacity .5s ease;
+  transition: opacity 0.5s ease;
 }
 
 #external-options:hover {
@@ -91,7 +98,9 @@ body {
   text-decoration: none;
 }
 
-a, a:hover, a:visited {
+a,
+a:hover,
+a:visited {
   color: #fff;
 }
 

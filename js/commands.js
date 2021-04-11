@@ -1,27 +1,27 @@
 const commands = {
-	clear: {
-        arguments: [],
-        execute: () => {
-            terminal_msg.innerHTML = "";
-        }
+  clear: {
+    arguments: [],
+    execute: () => {
+      terminal_msg.innerHTML = "";
     },
-    echo: {
-        arguments: [],
-        execute: (arguments) => {
-                terminal_msg.innerHTML += "<br />" + args + "<br />";
-        }
+  },
+  echo: {
+    arguments: [],
+    execute: (arguments) => {
+      terminal_msg.innerHTML += "<br />" + args + "<br />";
     },
-    exit: {
-        arguments: [],
-        execute: (arguments) => {
-                terminal_msg.innerHTML += "<br />Bye!<br />";
-                setTimeout(window.close(), 300);
-        }
+  },
+  exit: {
+    arguments: [],
+    execute: (arguments) => {
+      terminal_msg.innerHTML += "<br />Bye!<br />";
+      setTimeout(window.close(), 300);
     },
-	help: {
-        arguments: [],
-        execute: (arguments) => {
-            terminal_msg.innerHTML += `<br />
+  },
+  help: {
+    arguments: [],
+    execute: (arguments) => {
+      terminal_msg.innerHTML += `<br />
             Here are commands you can play with.<br />
             <br />
             <strong>clear</strong>\xa0\xa0\xa0\xa0clear terminal console<br />
@@ -37,81 +37,105 @@ const commands = {
             <strong>uname</strong>\xa0\xa0\xa0\xa0display small system info<br />
             <strong>whoami</strong>\xa0\xa0\xa0display session user name<br />
             `;
-        }
     },
-	history: {
-        arguments: ["-c"],
-        execute: (arguments) => {
-            if (arguments.includes("-c")) {
-                consoleHistory = [];
-            } else if (arguments.length == 0) {
-                for (let i = 0; i < consoleHistory.length - 1; i++) {
-                    terminal_msg.innerHTML += "<br />" + (i + 1) + " " + consoleHistory[i];
-                }
-            } else {
-                terminal_msg.innerHTML += "<br />" + "history: invalid arguments " + arguments.join(" ") + "<br />";
+  },
+  history: {
+    arguments: ["-c"],
+    execute: (arguments) => {
+      if (arguments.includes("-c")) {
+        consoleHistory = [];
+      } else if (arguments.length == 0) {
+        for (let i = 0; i < consoleHistory.length - 1; i++) {
+          terminal_msg.innerHTML +=
+            "<br />" + (i + 1) + " " + consoleHistory[i];
+        }
+      } else {
+        terminal_msg.innerHTML +=
+          "<br />" +
+          "history: invalid arguments " +
+          arguments.join(" ") +
+          "<br />";
 
-                new Audio("sounds/Sosumi.aiff.wav").play();
-            }
-    
-            terminal_msg.innerHTML += "<br />";
-        }
+        new Audio("sounds/Sosumi.aiff.wav").play();
+      }
+
+      terminal_msg.innerHTML += "<br />";
     },
-	hostname: {
-        arguments: [],
-        execute: (arguments) => { terminal_msg.innerHTML += "<br>" + terminalSession.hostname + "</br>"; }
+  },
+  hostname: {
+    arguments: [],
+    execute: (arguments) => {
+      terminal_msg.innerHTML += "<br>" + terminalSession.hostname + "</br>";
     },
-    ls: {
-        arguments: [],
-        execute: (arguments) => {
-            terminal_msg.innerHTML += `<br />
+  },
+  ls: {
+    arguments: [],
+    execute: (arguments) => {
+      terminal_msg.innerHTML += `<br />
                                         <span style='color: #4E9A06; font-weight: bold;'>
-                                            ${executable.join("\xa0\xa0\xa0") + "\xa0\xa0\xa0" + oilshit.join("\xa0\xa0\xa0")}
+                                            ${
+                                              executable.join("\xa0\xa0\xa0") +
+                                              "\xa0\xa0\xa0" +
+                                              oilshit.join("\xa0\xa0\xa0")
+                                            }
                                         </span><br />`;
-        }
     },
-    reboot: {
-        arguments: [],
-        execute: (arguments) => {
-            setTimeout(() => {
-                document.body.style.backgroundColor = "#000";
-                document.getElementById("external-options").style.display = "none";
-                document.getElementById("shortcut").style.display = "none";
-                commands.reset.execute(arguments, 5000);
-                setTimeout(() => {
-                    document.body.style.backgroundColor = "#300a24";
-                }, 4500, async=true)
-                setTimeout(() => {
-                    document.getElementById("external-options").style.display = "block";
-                    document.getElementById("shortcut").style.display = "block";
-                }, 4750, async=true);
-            }, 300);
-        },
+  },
+  reboot: {
+    arguments: [],
+    execute: (arguments) => {
+      setTimeout(() => {
+        document.body.style.backgroundColor = "#000";
+        document.getElementById("external-options").style.display = "none";
+        document.getElementById("shortcut").style.display = "none";
+        commands.reset.execute(arguments, 5000);
+        setTimeout(
+          () => {
+            document.body.style.backgroundColor = "#300a24";
+          },
+          4500,
+          (async = true)
+        );
+        setTimeout(
+          () => {
+            document.getElementById("external-options").style.display = "block";
+            document.getElementById("shortcut").style.display = "block";
+          },
+          4750,
+          (async = true)
+        );
+      }, 300);
     },
-    reset: {
-        arguments: [],
-        execute: (arguments, bootTime = 750) => {
-            consoleInput.style.display = "none";
-            terminal_msg.innerHTML = "";
-            consoleHistory = [];
-            historyIndex = consoleHistory.length;
-            setTimeout(() => { 
-                getLastLogin();
-                consoleInput.style.display = "block";	
-            }, bootTime);
-        }
+  },
+  reset: {
+    arguments: [],
+    execute: (arguments, bootTime = 750) => {
+      consoleInput.style.display = "none";
+      terminal_msg.innerHTML = "";
+      consoleHistory = [];
+      historyIndex = consoleHistory.length;
+      setTimeout(() => {
+        getLastLogin();
+        consoleInput.style.display = "block";
+      }, bootTime);
     },
-    test: {
-        arguments: [],
-        execute: (arguments) => { terminal_msg.innerHTML += "</br>"; }
+  },
+  test: {
+    arguments: [],
+    execute: (arguments) => {
+      terminal_msg.innerHTML += "</br>";
     },
-    uname: {
-        arguments: [],
-        execute: (arguments) => { terminal_msg.innerHTML += "<br />(Not) Linux  <br />"; }
+  },
+  uname: {
+    arguments: [],
+    execute: (arguments) => {
+      terminal_msg.innerHTML += "<br />(Not) Linux  <br />";
     },
-    whoami: {
-        arguments: [],
-        execute: (arguments) => { terminal_msg.innerHTML += "<br>" + terminalSession.username + "</br>"; },
-    }
-    
+  },
+  whoami: {
+    arguments: [],
+    execute: (arguments) => {
+      terminal_msg.innerHTML += "<br>" + terminalSession.username + "</br>";
+    },
+  },
 };
