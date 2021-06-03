@@ -1,9 +1,10 @@
+// initial date a and b
 const a = new Date("09/02/1998");
 let b = new Date();
 
 let month = parseInt((b.getMonth() - (-12 + a.getMonth())) % 12);
 let year =
-  b.getFullYear() -
+  b.getFullYear() - (month > a.getMonth() ? 1 : 0) -
   a.getFullYear() +
   parseInt((a.getMonth() + b.getMonth()) / 12);
 
