@@ -9,20 +9,20 @@ const commands = {
     arguments: [],
     execute: (arguments) => {
       terminal_msg.innerHTML += "<br />" + args + "<br />";
-    }
-   },
+    },
+  },
   date: {
     arguments: [],
     execute: (arguments) => {
       terminal_msg.innerHTML += "<br />" + new Date() + "<br />";
-    }
+    },
   },
   exit: {
     arguments: [],
     execute: (arguments) => {
       terminal_msg.innerHTML += "<br />Bye!<br />";
       setTimeout(window.close(), 300);
-    }
+    },
   },
   help: {
     arguments: [],
@@ -143,6 +143,34 @@ const commands = {
     arguments: [],
     execute: (arguments) => {
       terminal_msg.innerHTML += "<br>" + terminalSession.username + "</br>";
+    },
+  },
+
+  // non Linux-based commands
+  portfolio: {
+    arguments: [],
+    execute: async (arguments) => {
+      console.log(args);
+      const accumulatedCommands = ("portfolio " + args).trim();
+
+      console.log("ini portfolio", accumulatedCommands);
+
+      consoleInput.style.display = "none";
+
+      await fetch("https://ipa-ndd.vercel.app/api/command/exec", {
+        method: "POST",
+        body: JSON.stringify({ command: accumulatedCommands }),
+        referrerPolicy: "no-referrer",
+      })
+        .then((res) => res.json())
+        .then((res) => {
+          console.log(res);
+        })
+        .catch((error) => {
+          console.warn(error.message);
+          consoleInput.style.display = "flex";
+          terminal_msg.innerHTML += "<br />portfolio: command not found<br />";
+        });
     },
   },
 };
