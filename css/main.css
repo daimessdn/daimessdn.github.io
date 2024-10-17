@@ -36,6 +36,8 @@ body {
 
 #input {
   margin: 0;
+  display: flex;
+  gap: 0.5rem;
 }
 
 .machine-console {
