@@ -169,12 +169,13 @@ const commands = {
       await fetch("https://ipa-ndd.vercel.app/api/command/exec", {
         method: "POST",
         body: JSON.stringify({ command: accumulatedCommands }),
+
         headers: { "Content-Type": "application/json" },
+
         referrerPolicy: "no-referrer",
       })
         .then((res) => res.json())
         .then((res) => {
-          console.log(res);
           const output = res.data.output;
           terminal_msg.innerHTML += `<br />${output.replace(
             /(?:\r\n|\r|\n)/g,
@@ -186,6 +187,7 @@ const commands = {
           if (res.data.link != null) {
             window.open(res.data.link, "_blank");
           }
+
         })
         .catch((error) => {
           console.warn(error.message);
