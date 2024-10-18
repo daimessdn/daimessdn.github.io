@@ -166,8 +166,7 @@ const commands = {
 
       consoleInput.style.display = "none";
 
-      // await fetch("https://ipa-ndd.vercel.app/api/command/exec", {
-      await fetch("http://127.0.0.1:3000/api/command/exec", {
+      await fetch("https://ipa-ndd.vercel.app/api/command/exec", {
         method: "POST",
         body: JSON.stringify({ command: accumulatedCommands }),
         headers: { "Content-Type": "application/json" },
