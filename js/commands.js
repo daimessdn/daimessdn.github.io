@@ -30,19 +30,22 @@ const commands = {
       terminal_msg.innerHTML += `<br />
             Here are commands you can play with.<br />
             <br />
-            <strong>clear</strong>\xa0\xa0\xa0\xa0clear terminal console<br />
-            <strong>echo</strong>\xa0\xa0\xa0\xa0\xa0display a line of text<br />
-            <strong>date</strong>\xa0\xa0\xa0\xa0show current date<br />
-            <strong>exit</strong>\xa0\xa0\xa0\xa0\xa0exit terminal session<br />
-            <strong>help</strong>\xa0\xa0\xa0\xa0\xa0display available commands help<br />
-            <strong>history</strong>\xa0\xa0display console history<br />
-            <strong>hostname</strong>\xa0display system host name<br />
-            <strong>ls</strong>\xa0\xa0\xa0\xa0\xa0\xa0\xa0list directory contents<br />
-            <strong>reset</strong>\xa0\xa0\xa0\xa0reset terminal session<br />
-            <strong>reboot</strong>\xa0\xa0\xa0reset terminal machine (I mean, not real machine)<br />
-            <strong>test</strong>\xa0\xa0\xa0\xa0\xa0testing command<br />
-            <strong>uname</strong>\xa0\xa0\xa0\xa0display small system info<br />
-            <strong>whoami</strong>\xa0\xa0\xa0display session user name<br />
+            <strong>clear</strong>\xa0\xa0\xa0\xa0\xa0clear terminal console<br />
+            <strong>echo</strong>\xa0\xa0\xa0\xa0\xa0\xa0display a line of text<br />
+            <strong>date</strong>\xa0\xa0\xa0\xa0\xa0\xa0show current date<br />
+            <strong>exit</strong>\xa0\xa0\xa0\xa0\xa0\xa0exit terminal session<br />
+            <strong>help</strong>\xa0\xa0\xa0\xa0\xa0\xa0display available commands help<br />
+            <strong>history</strong>\xa0\xa0\xa0display console history<br />
+            <strong>hostname</strong>\xa0\xa0display system host name<br />
+            <strong>ls</strong>\xa0\xa0\xa0\xa0\xa0\xa0\xa0\xa0list directory contents<br />
+            <strong>reset</strong>\xa0\xa0\xa0\xa0\xa0reset terminal session<br />
+            <strong>reboot</strong>\xa0\xa0\xa0\xa0reset terminal machine (I mean, not real machine)<br />
+            <strong>test</strong>\xa0\xa0\xa0\xa0\xa0\xa0testing command<br />
+            <strong>uname</strong>\xa0\xa0\xa0\xa0\xa0display small system info<br />
+            <strong>whoami</strong>\xa0\xa0\xa0\xa0display session user name<br />
+            <br />
+            Other command<br />
+            <strong>portfolio</strong>\xa0shows my portfolio (although I'm not sure you'll get something)<br />
             `;
     },
   },
@@ -53,8 +56,14 @@ const commands = {
         consoleHistory = [];
       } else if (arguments.length == 0) {
         for (let i = 0; i < consoleHistory.length - 1; i++) {
+          let currentLine = (i + 1).toString();
+          let lineLength = currentLine.length;
+          let maxLineLength = consoleHistory.length.toString().length;
+
+          let extraSpace = "\xa0".repeat(maxLineLength - lineLength);
+
           terminal_msg.innerHTML +=
-            "<br />" + (i + 1) + " " + consoleHistory[i];
+            "<br />" + extraSpace + currentLine + " " + consoleHistory[i];
         }
       } else {
         terminal_msg.innerHTML +=
@@ -160,16 +169,31 @@ const commands = {
       await fetch("https://ipa-ndd.vercel.app/api/command/exec", {
         method: "POST",
         body: JSON.stringify({ command: accumulatedCommands }),
+
+        headers: { "Content-Type": "application/json" },
+
         referrerPolicy: "no-referrer",
       })
         .then((res) => res.json())
         .then((res) => {
-          console.log(res);
+          const output = res.data.output;
+          terminal_msg.innerHTML += `<br />${output.replace(
+            /(?:\r\n|\r|\n)/g,
+            "<br>"
+          )}<br />`;
+          consoleInput.style.display = "flex";
+          document.querySelector(".console-input").focus();
+
+          if (res.data.link != null) {
+            window.open(res.data.link, "_blank");
+          }
+
         })
         .catch((error) => {
           console.warn(error.message);
           consoleInput.style.display = "flex";
           terminal_msg.innerHTML += "<br />portfolio: command not found<br />";
+          document.querySelector(".console-input").focus();
         });
     },
   },
