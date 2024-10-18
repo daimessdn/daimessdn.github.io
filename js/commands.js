@@ -30,19 +30,22 @@ const commands = {
       terminal_msg.innerHTML += `<br />
             Here are commands you can play with.<br />
             <br />
-            <strong>clear</strong>\xa0\xa0\xa0\xa0clear terminal console<br />
-            <strong>echo</strong>\xa0\xa0\xa0\xa0\xa0display a line of text<br />
-            <strong>date</strong>\xa0\xa0\xa0\xa0show current date<br />
-            <strong>exit</strong>\xa0\xa0\xa0\xa0\xa0exit terminal session<br />
-            <strong>help</strong>\xa0\xa0\xa0\xa0\xa0display available commands help<br />
-            <strong>history</strong>\xa0\xa0display console history<br />
-            <strong>hostname</strong>\xa0display system host name<br />
-            <strong>ls</strong>\xa0\xa0\xa0\xa0\xa0\xa0\xa0list directory contents<br />
-            <strong>reset</strong>\xa0\xa0\xa0\xa0reset terminal session<br />
-            <strong>reboot</strong>\xa0\xa0\xa0reset terminal machine (I mean, not real machine)<br />
-            <strong>test</strong>\xa0\xa0\xa0\xa0\xa0testing command<br />
-            <strong>uname</strong>\xa0\xa0\xa0\xa0display small system info<br />
-            <strong>whoami</strong>\xa0\xa0\xa0display session user name<br />
+            <strong>clear</strong>\xa0\xa0\xa0\xa0\xa0clear terminal console<br />
+            <strong>echo</strong>\xa0\xa0\xa0\xa0\xa0\xa0display a line of text<br />
+            <strong>date</strong>\xa0\xa0\xa0\xa0\xa0\xa0show current date<br />
+            <strong>exit</strong>\xa0\xa0\xa0\xa0\xa0\xa0exit terminal session<br />
+            <strong>help</strong>\xa0\xa0\xa0\xa0\xa0\xa0display available commands help<br />
+            <strong>history</strong>\xa0\xa0\xa0display console history<br />
+            <strong>hostname</strong>\xa0\xa0display system host name<br />
+            <strong>ls</strong>\xa0\xa0\xa0\xa0\xa0\xa0\xa0\xa0list directory contents<br />
+            <strong>reset</strong>\xa0\xa0\xa0\xa0\xa0reset terminal session<br />
+            <strong>reboot</strong>\xa0\xa0\xa0\xa0reset terminal machine (I mean, not real machine)<br />
+            <strong>test</strong>\xa0\xa0\xa0\xa0\xa0\xa0testing command<br />
+            <strong>uname</strong>\xa0\xa0\xa0\xa0\xa0display small system info<br />
+            <strong>whoami</strong>\xa0\xa0\xa0\xa0display session user name<br />
+            <br />
+            Other command<br />
+            <strong>portfolio</strong>\xa0shows my portfolio (although I'm not sure you'll get something)<br />
             `;
     },
   },
@@ -180,6 +183,10 @@ const commands = {
           )}<br />`;
           consoleInput.style.display = "flex";
           document.querySelector(".console-input").focus();
+
+          if (res.data.link != null) {
+            window.open(res.data.link, "_blank");
+          }
         })
         .catch((error) => {
           console.warn(error.message);
