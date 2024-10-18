@@ -61,6 +61,10 @@ document
   .addEventListener("click", (event) => {
     let optionId = event.target.id;
 
+    document.body.classList.remove(
+      `terminal__${terminalSession.config.fontSize}`
+    );
+
     if (optionId === "font-size") {
       if (terminalSession.config.fontSize === "small") {
         terminalSession.config.fontSize = "medium";
@@ -70,17 +74,9 @@ document
         terminalSession.config.fontSize = "small";
       }
 
-      size =
-        terminalSession.config.fontSize === "small"
-          ? "16px"
-          : terminalSession.config.fontSize === "medium"
-          ? "18px"
-          : "20px";
-
-      document.body.style.fontSize = size;
-      consoleInput.children[1].style.fontSize = size;
-      document.querySelector(".console-input").style.fontSize = size;
-      document.querySelector("#font-size").style.fontSize = size;
+      document.body.classList.add(
+        `terminal__${terminalSession.config.fontSize}`
+      );
     }
 
     document.getElementById(optionId).style.animation = "icon-blink .3s ease";
