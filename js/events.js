@@ -1,3 +1,23 @@
+// onload process
+window.onload = async () => {
+  document.querySelector("#input").style.display = "none";
+
+  await fetch("https://ipa-ndd.vercel.app/api/start")
+    .then((res) => res.json())
+    .then((res) => {
+      const { version, session } = res.data;
+      terminalVersion = version;
+      terminalSession = session;
+
+      document.title =
+        "@" + terminalSession.username + " " + terminalVersion + "";
+
+      // update terminal session
+      getLastLogin();
+      document.querySelector("#input").style.display = "flex";
+    });
+};
+
 window.addEventListener("focus", () => {
   focusOnConsoleInput();
 });
@@ -34,10 +54,6 @@ document.addEventListener("keydown", (event) => {
     "<kbd>" + event.key + "</kbd>";
 
   consoleInput.children[1].focus();
-});
-
-document.addEventListener("DOMContentLoaded", () => {
-  getLastLogin();
 });
 
 document

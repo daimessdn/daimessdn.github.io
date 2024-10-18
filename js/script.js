@@ -1,22 +1,12 @@
-// initial date a and b
-const a = new Date("09/02/1998");
-let b = new Date();
-
-let month = parseInt((b.getMonth() - (-12 + a.getMonth())) % 12);
-let year =
-  b.getFullYear() - (month > a.getMonth() ? 1 : 0) -
-  a.getFullYear() +
-  parseInt((a.getMonth() + b.getMonth()) / 12);
-
 let terminal_msg = document.querySelector("#container");
 
 let terminalSession = {
-  username: "dimaswehhh",
-  hostname: "daimessdn.github.io",
+  username: "root",
+  hostname: "root",
   config: {
     fontSize: "small",
   },
-};
+}; // DEFAULT TERMINAL SESSION
 
 // sound effects
 const errorSound = new Audio("sounds/bell.oga");
@@ -28,28 +18,20 @@ let historyIndex = consoleHistory.length;
 
 let startingSelection = 0;
 
-if (month < 10) {
-  month = "0" + month;
-}
-
-if (month > 0) {
-  year = year - 1;
-}
-
-let datever = year + "." + month;
+let terminalVersion = "00.00"; // DEFAULT TERMINAL VERSION
 
 const getLastLogin = () => {
   b = new Date();
   terminal_msg.innerHTML += `Last login: ${b.toString()}<br />
-							   <br />
-							   Welcome to ${terminalSession.hostname}<br />
-							   Current version: ${datever}<br /><br />
-							   Type <strong>help</strong> to display help information for using terminal<br />
-							   or visit
-							    <a href="https://github.com/daimessdn/daimessdn.github.io" target="_blank">
-									https://github.com/daimessdn/daimessdn.github.io</a><br />
-								for web documentation.
-							   <br /><br />`;
+<br />
+Welcome to ${terminalSession.hostname}<br />
+Current version: ${terminalVersion}<br /><br />
+Type <strong>help</strong> to display help information for using terminal<br />
+or visit
+ <a href="https://github.com/daimessdn/daimessdn.github.io" target="_blank">
+https://github.com/daimessdn/daimessdn.github.io</a><br />
+for web documentation.
+<br /><br />`;
 };
 
 let consoleInput = document.getElementById("input");
@@ -65,8 +47,6 @@ const generateConsoleInput = () => {
 const focusOnConsoleInput = () => {
   document.getElementById("input").children[1].focus();
 };
-
-document.title = "@" + terminalSession.username + " " + datever + "";
 
 const executable = ["journal", "codebread", "simpth", "generic-sensor"];
 const oilshit = ["gloss-oleum", "las_converter"];
