@@ -53,8 +53,14 @@ const commands = {
         consoleHistory = [];
       } else if (arguments.length == 0) {
         for (let i = 0; i < consoleHistory.length - 1; i++) {
+          let currentLine = (i + 1).toString();
+          let lineLength = currentLine.length;
+          let maxLineLength = consoleHistory.length.toString().length;
+
+          let extraSpace = "\xa0".repeat(maxLineLength - lineLength);
+
           terminal_msg.innerHTML +=
-            "<br />" + (i + 1) + " " + consoleHistory[i];
+            "<br />" + extraSpace + currentLine + " " + consoleHistory[i];
         }
       } else {
         terminal_msg.innerHTML +=
@@ -157,19 +163,29 @@ const commands = {
 
       consoleInput.style.display = "none";
 
-      await fetch("https://ipa-ndd.vercel.app/api/command/exec", {
+      // await fetch("https://ipa-ndd.vercel.app/api/command/exec", {
+      await fetch("http://127.0.0.1:3000/api/command/exec", {
         method: "POST",
         body: JSON.stringify({ command: accumulatedCommands }),
+        headers: { "Content-Type": "application/json" },
         referrerPolicy: "no-referrer",
       })
         .then((res) => res.json())
         .then((res) => {
           console.log(res);
+          const output = res.data.output;
+          terminal_msg.innerHTML += `<br />${output.replace(
+            /(?:\r\n|\r|\n)/g,
+            "<br>"
+          )}<br />`;
+          consoleInput.style.display = "flex";
+          document.querySelector(".console-input").focus();
         })
         .catch((error) => {
           console.warn(error.message);
           consoleInput.style.display = "flex";
           terminal_msg.innerHTML += "<br />portfolio: command not found<br />";
+          document.querySelector(".console-input").focus();
         });
     },
   },
