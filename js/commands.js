@@ -189,6 +189,12 @@ const commands = {
           : `<br />`;
     },
   },
+  pwd: {
+    arguments: [],
+    execute: () => {
+      terminal_msg.innerHTML += "<br />" + "~/" + pwd.join("/") + "<br />";
+    },
+  },
   reboot: {
     arguments: [],
     execute: (arguments) => {
