@@ -54,11 +54,24 @@ body {
   font-size: 20px;
 }
 
-mark {
+mark,
+.text-yellow {
   font-weight: 700;
 
   background-color: transparent;
   color: #fbbf24 !important;
+}
+
+.text-blue {
+  color: #44a6ac;
+}
+
+.text-green {
+  color: #8ae234;
+}
+
+.text-white {
+  color: #fff;
 }
 
 strong {
@@ -72,8 +85,7 @@ strong {
 
 #input {
   margin: 0;
-  display: flex;
-  gap: 10px;
+  width: 100%;
 }
 
 .machine-console {
@@ -82,7 +94,6 @@ strong {
 }
 
 .machine-console::after {
-  content: ":~$";
   color: #fff;
   width: 3px;
 }
@@ -90,8 +101,12 @@ strong {
 .console-input {
   background-color: #300a24;
   color: #fff;
+  outline: none;
   border: none;
-  font-family: "Necto Mono";
+  margin: 0;
+  padding: 0;
+  line-height: 1.1;
+  font-family: "Space Mono";
   width: fit-content;
 }
 
@@ -152,7 +167,7 @@ a:visited {
 }
 
 #shortcut kbd {
-  font-family: "Necto Mono";
+  font-family: "Space Mono";
 }
 
 input {

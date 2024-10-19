@@ -1,4 +1,63 @@
 const commands = {
+  cd: {
+    arguments: [],
+    execute: () => {
+      const dirs = args.split("/");
+
+      let prevPwd = JSON.parse(JSON.stringify(pwd));
+      let prevFs = fs;
+
+      prevPwd.forEach((dir, dirIndex) => {
+        prevFs =
+          dirIndex > 0
+            ? prevFs.contents.find((dir) => dir.name === prevPwd[dirIndex])
+            : prevFs.find((dir) => dir.name === prevPwd[dirIndex]);
+      });
+
+      if (args === "..") {
+        pwd.pop();
+      }
+
+      if (args !== ".." && args !== "." && args !== "") {
+        let selectedDir = prevFs;
+        for (let i = 0; i < dirs.length; i++) {
+          if (dirs[i] !== "" && dirs[i] != "..") {
+            selectedDir =
+              pwd.length > 0
+                ? selectedDir.contents.find((dir) => dir.name === dirs[i])
+                : selectedDir.find((dir) => dir.name === dirs[i]);
+
+            if (selectedDir !== undefined) {
+              pwd.push(dirs[i]);
+            } else {
+              terminal_msg.innerHTML += `<br />cd: ${args}: No such file or directory`;
+              pwd = prevPwd;
+              break;
+            }
+          } else if (dirs[i] == "..") {
+            // get top filesystem directory
+            let tempDir = fs;
+            let topPwd = pwd.slice(0, -1);
+
+            for (let j = 0; j < topPwd.length; j++) {
+              let topSelectedDir = tempDir.find((x) => x.name === topPwd[j]);
+
+              if (j != topPwd.length - 1) {
+                tempDir = topSelectedDir;
+              }
+            }
+
+            selectedDir = tempDir;
+            pwd.pop();
+          }
+        }
+      }
+
+      pwdStr = ":~" + (pwd.length > 0 ? "/" : "") + pwd.join("/") + "$";
+      workingDirElement.innerHTML = pwdStr;
+      terminal_msg.innerHTML += "<br />";
+    },
+  },
   clear: {
     arguments: [],
     execute: () => {
@@ -30,6 +89,7 @@ const commands = {
       terminal_msg.innerHTML += `<br />
             Here are commands you can play with.<br />
             <br />
+            <strong>cd</strong>\xa0\xa0\xa0\xa0\xa0\xa0\xa0\xa0change working directory<br />
             <strong>clear</strong>\xa0\xa0\xa0\xa0\xa0clear terminal console<br />
             <strong>echo</strong>\xa0\xa0\xa0\xa0\xa0\xa0display a line of text<br />
             <strong>date</strong>\xa0\xa0\xa0\xa0\xa0\xa0show current date<br />
@@ -38,13 +98,14 @@ const commands = {
             <strong>history</strong>\xa0\xa0\xa0display console history<br />
             <strong>hostname</strong>\xa0\xa0display system host name<br />
             <strong>ls</strong>\xa0\xa0\xa0\xa0\xa0\xa0\xa0\xa0list directory contents<br />
+            <strong>pwd</strong>\xa0\xa0\xa0\xa0\xa0\xa0\xa0print working directory<br />
             <strong>reset</strong>\xa0\xa0\xa0\xa0\xa0reset terminal session<br />
             <strong>reboot</strong>\xa0\xa0\xa0\xa0reset terminal machine (I mean, not real machine)<br />
             <strong>test</strong>\xa0\xa0\xa0\xa0\xa0\xa0testing command<br />
             <strong>uname</strong>\xa0\xa0\xa0\xa0\xa0display small system info<br />
             <strong>whoami</strong>\xa0\xa0\xa0\xa0display session user name<br />
             <br />
-            Other command<br />
+            Other commands<br />
             <strong>portfolio</strong>\xa0shows my portfolio (although I'm not sure you'll get something)<br />
             `;
     },
@@ -87,14 +148,52 @@ const commands = {
   ls: {
     arguments: [],
     execute: (arguments) => {
-      terminal_msg.innerHTML += `<br />
-                                        <span style='color: #4E9A06; font-weight: bold;'>
-                                            ${
-                                              executable.join("\xa0\xa0\xa0") +
-                                              "\xa0\xa0\xa0" +
-                                              oilshit.join("\xa0\xa0\xa0")
-                                            }
-                                        </span><br />`;
+      let output = "";
+
+      let workingDirContent = fs;
+      pwd.forEach((a, aIndex) => {
+        workingDirContent =
+          aIndex > 0
+            ? workingDirContent.contents.find((dir) => dir.name === a)
+            : workingDirContent.find((dir) => dir.name === a);
+      });
+
+      let lsResult =
+        pwd.length > 0 ? workingDirContent.contents : workingDirContent;
+
+      lsResult.forEach((f) => {
+        let textStyle;
+
+        switch (f.type) {
+          case "dir":
+            textStyle = "text-blue";
+            break;
+
+          case "binary":
+            textStyle = "text-blue";
+            break;
+
+          default:
+            textStyle = "text-white";
+        }
+
+        output += `<span class="${textStyle}">${f.name}</span>\xa0\xa0\xa0`;
+      });
+
+      terminal_msg.innerHTML +=
+        pwd.length > 0
+          ? lsResult && lsResult.length > 0
+            ? `<br />${output}<br />`
+            : "<br />"
+          : lsResult.length > 0
+          ? `<br />${output}<br />`
+          : `<br />`;
+    },
+  },
+  pwd: {
+    arguments: [],
+    execute: () => {
+      terminal_msg.innerHTML += "<br />" + "~/" + pwd.join("/") + "<br />";
     },
   },
   reboot: {
@@ -159,10 +258,7 @@ const commands = {
   portfolio: {
     arguments: [],
     execute: async (arguments) => {
-      console.log(args);
       const accumulatedCommands = ("portfolio " + args).trim();
-
-      console.log("ini portfolio", accumulatedCommands);
 
       consoleInput.style.display = "none";
 
@@ -187,10 +283,9 @@ const commands = {
           if (res.data.link != null) {
             window.open(res.data.link, "_blank");
           }
-
         })
         .catch((error) => {
-          console.warn(error.message);
+          console.error(error.message);
           consoleInput.style.display = "flex";
           terminal_msg.innerHTML += "<br />portfolio: command not found<br />";
           document.querySelector(".console-input").focus();
