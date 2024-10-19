@@ -18,6 +18,10 @@ let historyIndex = consoleHistory.length;
 
 let startingSelection = 0;
 
+const workingDirElement = document.querySelector(".pwd");
+let pwd = [];
+let pwdStr = ":~$";
+
 let terminalVersion = "00.00"; // DEFAULT TERMINAL VERSION
 
 const getLastLogin = () => {
@@ -40,20 +44,16 @@ let consoleInputSelect = document.querySelectorAll(".console-input");
 const generateConsoleInput = () => {
   terminal_msg.innerHTML += consoleInput;
   consoleInputSelect = document.querySelectorAll(".console-input");
-  consoleInput.children[1] = consoleInputSelect[consoleInputSelect.length - 1];
-  consoleInput.children[1].focus();
+  consoleInput.children[2] = consoleInputSelect[consoleInputSelect.length - 1];
+  consoleInput.children[2].focus();
 };
 
 const focusOnConsoleInput = () => {
-  document.getElementById("input").children[1].focus();
+  document.getElementById("input").children[2].focus();
 };
 
-const executable = ["journal", "codebread", "simpth", "generic-sensor"];
-const oilshit = ["gloss-oleum", "las_converter"];
-
 const dummyExec_ = (command) => {
-  terminal_msg.innerHTML += `<strong class="machine-console">${terminalSession.username}@${terminalSession.hostname}</strong>
-	<span class="console-input">${command}</span>`;
+  terminal_msg.innerHTML += `<strong class="machine-console">${terminalSession.username}@${terminalSession.hostname}</strong><strong class="pwd">${pwdStr}</strong><span class="console-input">${command}</span>`;
 
   command = command.trim();
   args = "";
@@ -68,46 +68,46 @@ const dummyExec_ = (command) => {
     command = command.substr(0, command.indexOf(" "));
   }
 
-  console.log(command);
-  console.log(args);
-
   command = command.replace("./", "");
   command = command.trim("<br>");
   command = command.trim();
 
-  if (executable.includes(command)) {
-    terminal_msg.innerHTML += `<br />Opening <em>${command}</em>, please wait...<br />`;
+  let prevPwd = JSON.parse(JSON.stringify(pwd));
+  let prevFs = fs;
 
-    window.open(
-      "https://daimessdn.github.io/" + command,
-      "_blank",
-      "height=500,width=400,location=no"
-    );
+  prevPwd.forEach((dir, dirIndex) => {
+    prevFs =
+      dirIndex > 0
+        ? prevFs.contents.find((dir) => dir.name === prevPwd[dirIndex])
+        : prevFs.find((dir) => dir.name === prevPwd[dirIndex]);
+  });
+
+  const fileContent = prevPwd.length > 0 ? prevFs.contents : prevFs;
+  const fileExecContent = fileContent.filter((file) => file.type == "binary");
+
+  const fileExecContentNames = fileExecContent.map((file) => file.name);
+
+  if (fileExecContentNames.includes(command)) {
+    // open executables (binary) dummy files if exists
+    const fileToExec = fileExecContent.find((file) => file.name == command);
+    fileToExec.exec();
 
     openSound.play();
-    terminal_msg.innerHTML += `${command} opened.<br />`;
-  } else if (oilshit.includes(command)) {
-    terminal_msg.innerHTML += `<br />Opening <em>${command}</em>, please wait...<br />`;
-
-    window.open(
-      "https://oilshit.github.io" + "/" + command,
-      "_blank",
-      "height=500,width=400,location=no"
-    );
-
-    openSound.play();
-    terminal_msg.innerHTML += `${command} opened.<br />`;
+    terminal_msg.innerHTML += "<br />";
   } else if (Object.keys(commands).includes(command)) {
+    // executes existing commands
     commands[command].execute(args);
   } else if (command == "") {
+    // executes empty response due to empty command
     terminal_msg.innerHTML += "</br>";
   } else {
+    // display error response due to not existing command
     terminal_msg.innerHTML += "<br />" + command + ": command not found<br />";
     commandNotFoundSound.play();
   }
 
   // generateConsoleInput();
-  consoleInput.children[1].value = "";
+  consoleInput.children[2].value = "";
 
   window.scrollTo(0, document.body.scrollHeight);
 };

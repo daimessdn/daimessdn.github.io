@@ -14,6 +14,8 @@ window.onload = async () => {
 
       // update terminal session
       getLastLogin();
+
+      workingDirElement.innerHTML = ":~$";
       document.querySelector("#input").style.display = "flex";
     });
 };
@@ -24,20 +26,20 @@ window.addEventListener("focus", () => {
 
 document.addEventListener("keydown", (event) => {
   if (event.key === "Enter") {
-    dummyExec_(consoleInput.children[1].value);
+    dummyExec_(consoleInput.children[2].value);
   } else if (event.key === "ArrowUp" && historyIndex >= 0) {
     if (historyIndex === 0) {
       errorSound.cloneNode().play();
     } else {
       historyIndex -= 1;
-      consoleInput.children[1].value = consoleHistory[historyIndex];
+      consoleInput.children[2].value = consoleHistory[historyIndex];
     }
   } else if (event.key === "ArrowDown") {
     if (historyIndex < consoleHistory.length) {
-      consoleInput.children[1].value = consoleHistory[historyIndex];
+      consoleInput.children[2].value = consoleHistory[historyIndex];
       historyIndex += 1;
     } else {
-      consoleInput.children[1].value = "";
+      consoleInput.children[2].value = "";
       errorSound.cloneNode().play();
     }
   } else if (event.key == "ArrowLeft") {
@@ -53,7 +55,7 @@ document.addEventListener("keydown", (event) => {
   document.getElementById("shortcut").innerHTML =
     "<kbd>" + event.key + "</kbd>";
 
-  consoleInput.children[1].focus();
+  consoleInput.children[2].focus();
 });
 
 document
