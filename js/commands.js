@@ -98,6 +98,7 @@ const commands = {
             <strong>history</strong>\xa0\xa0\xa0display console history<br />
             <strong>hostname</strong>\xa0\xa0display system host name<br />
             <strong>ls</strong>\xa0\xa0\xa0\xa0\xa0\xa0\xa0\xa0list directory contents<br />
+            <strong>pwd</strong>\xa0\xa0\xa0\xa0\xa0\xa0\xa0print working directory<br />
             <strong>reset</strong>\xa0\xa0\xa0\xa0\xa0reset terminal session<br />
             <strong>reboot</strong>\xa0\xa0\xa0\xa0reset terminal machine (I mean, not real machine)<br />
             <strong>test</strong>\xa0\xa0\xa0\xa0\xa0\xa0testing command<br />
