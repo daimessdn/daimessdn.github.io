@@ -170,7 +170,7 @@ const commands = {
             break;
 
           case "binary":
-            textStyle = "text-blue";
+            textStyle = "text-green";
             break;
 
           default:
