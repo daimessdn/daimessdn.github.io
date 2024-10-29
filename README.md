@@ -17,3 +17,7 @@ _By the way, I'm still not sure what the hell I'm creating about._
     something from typing it, might be worth to try).
     There are special arguments you might find out, `sudo` command
     might not working since I didn't create the command yet.
+    - `portfolio --damnit`: displaying portfolio input
+    - `portfolio --drive`: dislays portfolio link in Google Drive and also redirects to it.
+    - `portfolio --itch`: dislays portfolio link in Itch and also redirects to it.
+    - `portfolio --notion`: dislays portfolio link in Notion and also redirects to it.
