@@ -85,7 +85,7 @@ strong {
 
 #input {
   margin: 0;
-  width: 100%;
+  align-items: center;
 }
 
 .machine-console {
@@ -106,8 +106,8 @@ strong {
   margin: 0;
   padding: 0;
   line-height: 1.1;
+  flex: 1;
   font-family: "Space Mono";
-  width: fit-content;
 }
 
 .console-input:focus {
