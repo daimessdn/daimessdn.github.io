@@ -40,6 +40,16 @@ const fs = [
         type: "normal",
         cat: "HTML, CSS, JavaScript,<br />React, Vue, PHP, Python",
       },
+      {
+        name: "hobby.txt",
+        type: "normal",
+        cat: "eating, sleeping, beating, and &lt;coding /&gt;",
+      },
+      {
+        name: "readme.txt",
+        type: "normal",
+        cat: "thank you for reading me (づ｡◕‿‿◕｡)づ",
+      },
     ],
   },
   {
