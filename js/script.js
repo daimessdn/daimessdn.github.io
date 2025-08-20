@@ -18,6 +18,7 @@ let historyIndex = consoleHistory.length;
 
 let startingSelection = 0;
 
+// PWD section - current directory
 const workingDirElement = document.querySelector(".pwd");
 let pwd = [];
 let pwdStr = ":~$";
@@ -55,23 +56,28 @@ const focusOnConsoleInput = () => {
 const dummyExec_ = (command) => {
   terminal_msg.innerHTML += `<strong class="machine-console">${terminalSession.username}@${terminalSession.hostname}</strong><strong class="pwd">${pwdStr}</strong><span class="console-input">${command}</span>`;
 
+  // clear all command spaces
   command = command.trim();
   args = "";
 
+  // record command history
   if (command != "" && command != consoleHistory[consoleHistory.length - 1]) {
     consoleHistory.push(command);
     historyIndex = consoleHistory.length;
   }
 
+  // checking if command has arguments
   if (command.includes(" ")) {
     args = command.substr(command.indexOf(" ") + 1);
     command = command.substr(0, command.indexOf(" "));
   }
 
+  // command + args pre-processing
   command = command.replace("./", "");
   command = command.trim("<br>");
   command = command.trim();
 
+  // update pwd structure
   let prevPwd = JSON.parse(JSON.stringify(pwd));
   let prevFs = fs;
 
@@ -87,6 +93,7 @@ const dummyExec_ = (command) => {
 
   const fileExecContentNames = fileExecContent.map((file) => file.name);
 
+  // trigger response based on commandsm arguments, and dummy file
   if (fileExecContentNames.includes(command)) {
     // open executables (binary) dummy files if exists
     const fileToExec = fileExecContent.find((file) => file.name == command);

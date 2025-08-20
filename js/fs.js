@@ -31,6 +31,18 @@ const fs = [
     ],
   },
   {
+    name: "personal",
+    type: "dir",
+    exec: null,
+    contents: [
+      {
+        name: "skills.txt",
+        type: "normal",
+        cat: "HTML, CSS, JavaScript,<br />React, Vue, PHP, Python",
+      },
+    ],
+  },
+  {
     name: "folder1",
     type: "dir",
     exec: null,
