@@ -43,7 +43,7 @@ const fs = [
       {
         name: "hobby.txt",
         type: "normal",
-        cat: "eating, sleeping, beating, and &lt;coding /&gt;",
+        cat: "eating, sleeping, breathing, and &lt;coding /&gt;",
       },
       {
         name: "readme.txt",
